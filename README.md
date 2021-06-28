@@ -1,6 +1,6 @@
 #
 <p align="center">
-    <img src="./images/Logo.png">
+    <img src="./images/Logo.png" width="15%">
     <h1 align="center">
         CodeSpace
     </h1>
