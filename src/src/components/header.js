@@ -13,36 +13,36 @@ function header() {
         <nav id="navbar" className="navbar order-last order-lg-0">
           <ul>
             <li>
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="csdot.ml">
                 Home
               </a>
             </li>
             <li className="dropdown">
-              <a href="#">
+              <a href="csdot.ml">
                 <span>Academics</span>
               </a>
               <ul>
                 <li>
-                  <a href="#">Final Year</a>
+                  <a href="csdot.ml">Final Year</a>
                 </li>
                 <li>
-                  <a href="#">Third Year</a>
+                  <a href="csdot.ml">Third Year</a>
                 </li>
                 <li>
-                  <a href="#">Second Year</a>
+                  <a href="csdot.ml">Second Year</a>
                 </li>
                 <li>
-                  <a href="#">Upload Resources</a>
+                  <a href="csdot.ml">Upload Resources</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="csdot.ml">
                 Placements
               </a>
             </li>
             <li>
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="csdot.ml">
                 Certification
               </a>
             </li>

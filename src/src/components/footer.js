@@ -32,23 +32,23 @@ class Footer extends Component {
                 <h4>Made With</h4>
                 <ul>
                   <li>
-                    <i className="bx bx-chevron-right" /> <a href="#">Home</a>
+                    <i className="bx bx-chevron-right" /> <a href="csdot.ml">Home</a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="#">About us</a>
+                    <a href="csdot.ml">About us</a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="#">Services</a>
+                    <a href="csdot.ml">Services</a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="#">Terms of service</a>
+                    <a href="csdot.ml">Terms of service</a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="#">Privacy policy</a>
+                    <a href="csdot.ml">Privacy policy</a>
                   </li>
                 </ul>
               </div>
@@ -58,24 +58,24 @@ class Footer extends Component {
                   <li>
                     <i className="bx bx-chevron-right" />
 
-                    <a href="#">Web Design</a>
+                    <a href="csdot.ml">Web Design</a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="#">Web Development</a>
+                    <a href="csdot.ml">Web Development</a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="#">Product Management</a>
+                    <a href="csdot.ml">Product Management</a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
 
-                    <a href="#">Marketing</a>
+                    <a href="csdot.ml">Marketing</a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="#">Graphic Design</a>
+                    <a href="csdot.ml">Graphic Design</a>
                   </li>
                 </ul>
               </div>
@@ -107,7 +107,7 @@ class Footer extends Component {
             <span> &lt;/&gt; </span>
           </div>
           <a
-            href="#"
+            href="csdot.ml"
             className="back-to-top d-flex align-items-center justify-content-center"
           >
             <i className="fa fa-arrow-up" />
