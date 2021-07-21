@@ -29,30 +29,6 @@ class Footer extends Component {
                 </div>
               </div>
               <div className="col-lg-3 col-md-6 footer-links">
-                <h4>Made With</h4>
-                <ul>
-                  <li>
-                    <i className="bx bx-chevron-right" /> <a href="csdot.ml">Home</a>
-                  </li>
-                  <li>
-                    <i className="bx bx-chevron-right" />
-                    <a href="csdot.ml">About us</a>
-                  </li>
-                  <li>
-                    <i className="bx bx-chevron-right" />
-                    <a href="csdot.ml">Services</a>
-                  </li>
-                  <li>
-                    <i className="bx bx-chevron-right" />
-                    <a href="csdot.ml">Terms of service</a>
-                  </li>
-                  <li>
-                    <i className="bx bx-chevron-right" />
-                    <a href="csdot.ml">Privacy policy</a>
-                  </li>
-                </ul>
-              </div>
-              <div className="col-lg-3 col-md-6 footer-links">
                 <h4>Links</h4>
                 <ul>
                   <li>
@@ -79,6 +55,35 @@ class Footer extends Component {
                   </li>
                 </ul>
               </div>
+              <div className="col-lg-3 col-md-6 footer-links">
+                <h4>Made With</h4>
+                <ul>
+                  <li>
+                    <i className="bx bx-chevron-right" />{" "}
+                    <a href="https://fastapi.tiangolo.com" target="_blank">
+                      Fast API
+                    </a>
+                  </li>
+                  <li>
+                    <i className="bx bx-chevron-right" />
+                    <a href="https://www.heroku.com" target="_blank">
+                      Heroku
+                    </a>
+                  </li>
+                  <li>
+                    <i className="bx bx-chevron-right" />
+                    <a href="https://deta.sh" target="_blank">Deta</a>
+                  </li>
+                  <li>
+                    <i className="bx bx-chevron-right" />
+                    <a href="https://reactjs.org/docs/getting-started.html" target="_blank">React</a>
+                  </li>
+                  <li>
+                    <i className="bx bx-chevron-right" />
+                    <a href="https://vercel.com/" target="_blank">Versal</a>
+                  </li>
+                </ul>
+              </div>
               <div className="col-lg-3 col-md-6">
                 <h4>Contact Us</h4>
                 <p>
@@ -94,7 +99,7 @@ class Footer extends Component {
           <div className="copyright">
             © Copyright
             <strong>
-              <span>CodeSpace</span>
+              <span> CodeSpace</span>
             </strong>
             . All Rights Reserved
           </div>
@@ -107,7 +112,7 @@ class Footer extends Component {
             <span> &lt;/&gt; </span>
           </div>
           <a
-            href="csdot.ml"
+            href="#"
             className="back-to-top d-flex align-items-center justify-content-center"
           >
             <i className="fa fa-arrow-up" />
