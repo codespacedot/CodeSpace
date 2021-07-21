@@ -34,24 +34,54 @@ class Footer extends Component {
                   <li>
                     <i className="bx bx-chevron-right" />
 
-                    <a href="csdot.ml">Web Design</a>
+                    <a
+                      href="https://csdot.ml"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Web Design
+                    </a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="csdot.ml">Web Development</a>
+                    <a
+                      href="https://csdot.ml"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Web Development
+                    </a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="csdot.ml">Product Management</a>
+                    <a
+                      href="https://csdot.ml"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Product Management
+                    </a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
 
-                    <a href="csdot.ml">Marketing</a>
+                    <a
+                      href="https://csdot.ml"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Marketing
+                    </a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="csdot.ml">Graphic Design</a>
+                    <a
+                      href="https://csdot.ml"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Graphic Design
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -60,27 +90,53 @@ class Footer extends Component {
                 <ul>
                   <li>
                     <i className="bx bx-chevron-right" />{" "}
-                    <a href="https://fastapi.tiangolo.com" target="_blank">
+                    <a
+                      href="https://fastapi.tiangolo.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Fast API
                     </a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="https://www.heroku.com" target="_blank">
+                    <a
+                      href="https://www.heroku.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Heroku
                     </a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="https://deta.sh" target="_blank">Deta</a>
+                    <a
+                      href="https://deta.sh"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Deta
+                    </a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="https://reactjs.org/docs/getting-started.html" target="_blank">React</a>
+                    <a
+                      href="https://reactjs.org/docs/getting-started.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      React
+                    </a>
                   </li>
                   <li>
                     <i className="bx bx-chevron-right" />
-                    <a href="https://vercel.com/" target="_blank">Versal</a>
+                    <a
+                      href="https://vercel.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Versal
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -112,7 +168,7 @@ class Footer extends Component {
             <span> &lt;/&gt; </span>
           </div>
           <a
-            href="#"
+            href="/"
             className="back-to-top d-flex align-items-center justify-content-center"
           >
             <i className="fa fa-arrow-up" />
