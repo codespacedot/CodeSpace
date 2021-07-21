@@ -95,7 +95,7 @@ class Footer extends Component {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Fast API
+                      FastAPI
                     </a>
                   </li>
                   <li>
@@ -135,7 +135,7 @@ class Footer extends Component {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Versal
+                      Vercel
                     </a>
                   </li>
                 </ul>
@@ -153,14 +153,11 @@ class Footer extends Component {
             </div>
           </div>
           <div className="copyright">
-            © Copyright
+            Copyright © 2021
             <strong>
               <span> CodeSpace</span>
             </strong>
             . All Rights Reserved
-          </div>
-          <div className="credits">
-            Designed by <a href>CodeSpace</a>
           </div>
         </div>
         <div>
