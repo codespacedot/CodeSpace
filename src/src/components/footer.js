@@ -164,12 +164,14 @@ class Footer extends Component {
           <div id="preloader">
             <span> &lt;/&gt; </span>
           </div>
-          <a
-            href="/"
+          <button
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
             className="back-to-top d-flex align-items-center justify-content-center"
           >
             <i className="fa fa-arrow-up" />
-          </a>
+          </button>
         </div>
       </footer>
     );

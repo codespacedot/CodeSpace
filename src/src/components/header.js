@@ -13,7 +13,7 @@ function header() {
         <nav id="navbar" className="navbar order-last order-lg-0">
           <ul>
             <li>
-              <a className="nav-link" href="csdot.ml">
+              <a className="nav-link" href="/">
                 Home
               </a>
             </li>
