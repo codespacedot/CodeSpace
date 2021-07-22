@@ -8,7 +8,7 @@ function header() {
           <a className="splogo" href="index.html">
             &lt;/&gt;
           </a>
-          <a href="index.html">CodeSpace</a>
+          <a href="index.html"> CodeSpace</a>
         </h1>
         <nav id="navbar" className="navbar order-last order-lg-0">
           <ul>
@@ -22,13 +22,25 @@ function header() {
                 <span>Academics</span>
               </a>
               <ul>
-                <li>
+                <li
+                  onClick={() => {
+                    sessionStorage.setItem("year", 4);
+                  }}
+                >
                   <a href="/academics">Final Year</a>
                 </li>
-                <li>
+                <li
+                  onClick={() => {
+                    sessionStorage.setItem("year", 3);
+                  }}
+                >
                   <a href="/academics">Third Year</a>
                 </li>
-                <li>
+                <li
+                  onClick={() => {
+                    sessionStorage.setItem("year", 2);
+                  }}
+                >
                   <a href="/academics">Second Year</a>
                 </li>
                 <li>
