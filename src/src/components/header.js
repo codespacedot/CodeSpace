@@ -13,23 +13,35 @@ function header() {
         <nav id="navbar" className="navbar order-last order-lg-0">
           <ul>
             <li>
-              <a className="nav-link" href="csdot.ml">
+              <a className="nav-link" href="/">
                 Home
               </a>
             </li>
             <li className="dropdown">
-              <a href="csdot.ml">
+              <a href="/">
                 <span>Academics</span>
               </a>
               <ul>
-                <li>
-                  <a href="csdot.ml">Final Year</a>
+                <li
+                  onClick={() => {
+                    sessionStorage.setItem("year", 4);
+                  }}
+                >
+                  <a href="/academics">Final Year</a>
                 </li>
-                <li>
-                  <a href="csdot.ml">Third Year</a>
+                <li
+                  onClick={() => {
+                    sessionStorage.setItem("year", 3);
+                  }}
+                >
+                  <a href="/academics">Third Year</a>
                 </li>
-                <li>
-                  <a href="csdot.ml">Second Year</a>
+                <li
+                  onClick={() => {
+                    sessionStorage.setItem("year", 2);
+                  }}
+                >
+                  <a href="/academics">Second Year</a>
                 </li>
                 <li>
                   <a href="csdot.ml">Upload Resources</a>
@@ -71,7 +83,7 @@ function header() {
             </svg>
           </button>
         </div>
-        <a href className="get-started-btn">
+        <a href="/" className="get-started-btn">
           Log In
         </a>
       </div>
