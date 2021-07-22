@@ -1,41 +1,5 @@
-/*-------------- Theme Colour ---------------*/
-:root {
-  --clr-foreground: hsl(0 0% 0%);
-  --clr-background: hsl(0 0% 100%);
-  --clr-foregrey: rgba(110, 110, 110, 0.5);
-  --clr-backgrey: rgba(231, 231, 231, 0.5);
-  --clr-shadow: rgba(0, 0, 0, 0.5);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --clr-background: hsl(0 0% 0%);
-    --clr-foreground: hsl(0 0% 100%);
-    --clr-foregrey: rgba(110, 110, 110, 0.5);
-    --clr-backgrey: rgba(231, 231, 231, 0.5);
-    --clr-shadow: rgba(255, 255, 255, 0.5);
-  }
-}
-
-.light-theme {
-  --clr-foreground: hsl(0 0% 0%);
-  --clr-background: hsl(0 0% 100%);
-  --clr-foregrey: rgba(110, 110, 110, 0.5);
-  --clr-backgrey: rgba(231, 231, 231, 0.5);
-  --clr-whiteshadow: rgba(0, 0, 0, 0.5);
-}
-
-.dark-theme {
-  --clr-background: hsl(0 0% 0%);
-  --clr-foreground: hsl(0 0% 100%);
-  --clr-backgrey: rgba(110, 110, 110, 0.5);
-  --clr-foregrey: rgba(231, 231, 231, 0.5);
-  --clr-shadow: rgba(255, 255, 255, 0.5);
-}
-
 .cardspace {
-  padding-top: 3vh;
-  padding-bottom: 3vh;
+  padding: 3vh;
 }
 #year {
   width: 100%;
@@ -43,9 +7,7 @@
   background-size: cover;
   position: relative;
 }
-.border-top {
-  border-top: 1px solid var(--clr-foregrey);
-}
+
 .heading h1 {
   margin-top: 10%;
   margin-bottom: 2%;
@@ -55,12 +17,12 @@
   text-align: center;
 }
 .heading h2 {
-  margin-top: 5%;
+  margin-top: 8%;
   margin-bottom: 2%;
   color: var(--clr-foreground);
   font-weight: 600;
   font-size: 30px;
-  text-align: left;
+  text-align: center;
 }
 .card {
   background-color: var(--clr-background);
@@ -71,19 +33,17 @@
   border: 1px solid var(--clr-foreground);
   padding: 8px;
   transition: all ease-in-out 0.3s;
-  background: var(--clr-backgrey);
+  background: var(--clr-background);
   width: 100%;
   height: auto;
   border-radius: 7px;
-  min-height: 142px;
+  min-height: 100px;
   padding-top: 10px;
 }
 
 .card .icon-box .icon {
   margin: 0 auto;
-  width: 64px;
-  height: 64px;
-  background: var(--clr-foregrey);
+
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -113,7 +73,7 @@
 }
 
 .card .icon-box h4 a:hover {
-  color: var(--clr-background);
+  color: var(--clr-foreground);
 }
 
 .card .icon-box p {
@@ -121,29 +81,17 @@
   font-size: 20px;
   margin-bottom: 0;
   color: var(--clr-foreground);
-  font-weight: 600;
 }
 
 .card .icon-box:hover {
   border: 2px solid var(--clr-foreground);
-  box-shadow: 0px 0 35px 0 var(--clr-shadow);
   transform: translateY(-10px);
 }
 
-.gitlink {
-  font-size: 18px;
-  margin-bottom: 0;
-  margin-top: 5px;
-  width: 100%;
-  height: 40px;
-  background: var(--clr-foregrey);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.3s;
-  border-radius: 5px;
+.none p a:hover {
   color: var(--clr-foreground);
 }
-.gitlink a:hover {
-  color: var(--clr-background);
+
+.clr-fore a i {
+  color: var(--clr-foreground);
 }

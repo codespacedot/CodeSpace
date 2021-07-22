@@ -18,18 +18,18 @@ function header() {
               </a>
             </li>
             <li className="dropdown">
-              <a href="csdot.ml">
+              <a href="/">
                 <span>Academics</span>
               </a>
               <ul>
                 <li>
-                  <a href="csdot.ml">Final Year</a>
+                  <a href="/academics">Final Year</a>
                 </li>
                 <li>
-                  <a href="csdot.ml">Third Year</a>
+                  <a href="/academics">Third Year</a>
                 </li>
                 <li>
-                  <a href="csdot.ml">Second Year</a>
+                  <a href="/academics">Second Year</a>
                 </li>
                 <li>
                   <a href="csdot.ml">Upload Resources</a>
