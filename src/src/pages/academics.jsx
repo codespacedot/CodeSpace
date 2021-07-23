@@ -32,14 +32,8 @@ function Academics() {
 
   //calling api based on selected year
   useEffect(() => {
-    getYear();
-  }, []);
-
-  //function to call api
-
-  const getYear = () => {
-    console.log(year);
     if (year !== null) {
+      //function to call api
       axios
         .get(`https://csdot.herokuapp.com/api/academics/year/${year}`)
         .then((res) => {
@@ -73,7 +67,7 @@ function Academics() {
       setyear(0);
       setisLoading(false);
     }
-  };
+  }, [year]);
 
   //render of academics
   return (
