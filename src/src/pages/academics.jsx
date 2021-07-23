@@ -17,6 +17,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+//Academics component starts
+
 function Academics() {
   const [isLoading, setisLoading] = useState(true);
   const [yearName, setyearName] = useState("");
@@ -28,12 +30,13 @@ function Academics() {
 
   const classes = useStyles();
 
+  //calling api based on selected year
   useEffect(() => {
-    console.log("year is", year);
-    console.log("year data in ue is", yearData);
     getYear();
-    console.log(yearData);
-  });
+  }, []);
+
+  //function to call api
+
   const getYear = () => {
     console.log(year);
     if (year !== null) {
@@ -55,24 +58,24 @@ function Academics() {
           }
           console.log("responce is", res);
           if (res.status === 200) {
-            console.log("res is", res.data);
             const result = res.data;
             setyearData(result);
             setisLoading(false);
-            sessionStorage.removeItem("year");
           } else if (res.status === 500) {
-            window.location("/");
+            window.location = "/";
           }
         })
         .catch((error) => {
           console.log("errorrr", error);
-          window.location("/");
+          window.location = "/";
         });
     } else {
       setyear(0);
       setisLoading(false);
     }
   };
+
+  //render of academics
   return (
     <div>
       <Online>
@@ -102,42 +105,46 @@ function Academics() {
                   </div>
                 </div>
 
-                {yearData.ODD_SEMESTER.SUBJECTS.map((e) => {
-                  console.log(e.abbreviation);
-                  console.log(e.name);
+                {yearData.ODD_SEMESTER.SUBJECTS.map((odd) => {
                   return (
-                    <div class="col-lg-4 col-md-4 d-flex align-items-stretch  cardspace">
+                    <div
+                      key={odd.key}
+                      class="col-lg-4 col-md-4 d-flex align-items-stretch  cardspace"
+                    >
                       <div class="icon-box">
                         <div class="icon">
                           {" "}
                           <h4>
-                            <a href="/">{e.abbreviation}</a>
+                            <a href="/">{odd.abbreviation}</a>
                           </h4>{" "}
                         </div>
 
                         <div class="none">
                           {" "}
                           <p>
-                            <a href="/">{e.name}</a>
+                            <a href="/">{odd.name}</a>
                           </p>
                         </div>
                       </div>
                     </div>
                   );
                 })}
-                {yearData.ODD_SEMESTER.LABS.map((e) => {
+                {yearData.ODD_SEMESTER.LABS.map((odd) => {
                   return (
-                    <div class="col-lg-4 col-md-4 d-flex align-items-stretch  cardspace">
+                    <div
+                      key={odd.key}
+                      class="col-lg-4 col-md-4 d-flex align-items-stretch  cardspace"
+                    >
                       <div class="icon-box">
                         <div class="icon">
                           {" "}
                           <h4>
                             <a
-                              href={gitLabLink + e.abbreviation}
+                              href={gitLabLink + odd.abbreviation}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              {e.abbreviation} Lab
+                              {odd.abbreviation} Lab
                             </a>
                           </h4>{" "}
                         </div>
@@ -146,11 +153,11 @@ function Academics() {
                           {" "}
                           <p>
                             <a
-                              href={gitLabLink + e.abbreviation}
+                              href={gitLabLink + odd.abbreviation}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              {e.name}
+                              {odd.name}
                             </a>
                           </p>
                         </div>
@@ -168,23 +175,24 @@ function Academics() {
                   </div>
                 </div>
 
-                {yearData.EVEN_SEMESTER.SUBJECTS.map((e) => {
-                  console.log(e.abbreviation);
-                  console.log(e.name);
+                {yearData.EVEN_SEMESTER.SUBJECTS.map((even) => {
                   return (
-                    <div class="col-lg-4 col-md-4 d-flex align-items-stretch  cardspace">
+                    <div
+                      key={even.key}
+                      class="col-lg-4 col-md-4 d-flex align-items-stretch  cardspace"
+                    >
                       <div class="icon-box">
                         <div class="icon">
                           {" "}
                           <h4>
-                            <a href="/">{e.abbreviation}</a>
+                            <a href="/">{even.abbreviation}</a>
                           </h4>{" "}
                         </div>
 
                         <div class="none">
                           {" "}
                           <p>
-                            <a href="/">{e.name}</a>
+                            <a href="/">{even.name}</a>
                           </p>
                         </div>
                       </div>
@@ -192,19 +200,22 @@ function Academics() {
                   );
                 })}
 
-                {yearData.EVEN_SEMESTER.LABS.map((e) => {
+                {yearData.EVEN_SEMESTER.LABS.map((even) => {
                   return (
-                    <div class="col-lg-4 col-md-4 d-flex align-items-stretch  cardspace">
+                    <div
+                      key={even.key}
+                      class="col-lg-4 col-md-4 d-flex align-items-stretch  cardspace"
+                    >
                       <div class="icon-box">
                         <div class="icon">
                           {" "}
                           <h4>
                             <a
-                              href={gitLabLink + e.abbreviation}
+                              href={gitLabLink + even.abbreviation}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              {e.abbreviation} Lab
+                              {even.abbreviation} Lab
                             </a>
                           </h4>{" "}
                         </div>
@@ -213,11 +224,11 @@ function Academics() {
                           {" "}
                           <p>
                             <a
-                              href={gitLabLink + e.abbreviation}
+                              href={gitLabLink + even.abbreviation}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              {e.name}
+                              {even.name}
                             </a>
                           </p>
                         </div>
