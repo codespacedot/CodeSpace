@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import axios from "axios";
 import FooterCred from "../components/foot-cred";
-import NoYearFound from "./noyearfound";
 import { Offline, Online } from "react-detect-offline";
 
 //To set width of loading bar
@@ -25,6 +24,9 @@ function Academics() {
   const [oddSem, setoddSem] = useState(0);
   const [evenSem, setevenSem] = useState(0);
   const [yearData, setyearData] = useState([]);
+  const [gitLabLink, setgitLabLink] = useState(
+    `https://github.com/codespacedot/`
+  );
   const classes = useStyles();
 
   useEffect(() => {
@@ -59,13 +61,14 @@ function Academics() {
             const result = res.data;
             setyearData(result);
             setisLoading(false);
+            sessionStorage.removeItem("year");
           } else if (res.status === 500) {
-            return <NoYearFound />;
+            window.location("/");
           }
         })
         .catch((error) => {
           console.log("errorrr", error);
-          return <NoYearFound />;
+          window.location("/");
         });
     } else {
       setyear(0);
@@ -77,7 +80,7 @@ function Academics() {
       <Online>
         <Header />
         {year === 0 ? (
-          <NoYearFound />
+          (window.location = "/")
         ) : isLoading ? (
           <div className={classes.root}>
             <LinearProgress color="primary" />
@@ -131,14 +134,26 @@ function Academics() {
                         <div class="icon">
                           {" "}
                           <h4>
-                            <a href="/">{e.abbreviation}</a>
+                            <a
+                              href={gitLabLink + e.abbreviation}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {e.abbreviation} Lab
+                            </a>
                           </h4>{" "}
                         </div>
 
                         <div class="none">
                           {" "}
                           <p>
-                            <a href="/">{e.name}</a>
+                            <a
+                              href={gitLabLink + e.abbreviation}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {e.name}
+                            </a>
                           </p>
                         </div>
                       </div>
@@ -186,14 +201,26 @@ function Academics() {
                         <div class="icon">
                           {" "}
                           <h4>
-                            <a href="/">{e.abbreviation}</a>
+                            <a
+                              href={gitLabLink + e.abbreviation}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {e.abbreviation} Lab
+                            </a>
                           </h4>{" "}
                         </div>
 
                         <div class="none">
                           {" "}
                           <p>
-                            <a href="/">{e.name}</a>
+                            <a
+                              href={gitLabLink + e.abbreviation}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {e.name}
+                            </a>
                           </p>
                         </div>
                       </div>
