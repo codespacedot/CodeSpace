@@ -152,9 +152,6 @@ class Footer extends Component {
           </div>
         </div>
         <div>
-          <div id="preloader">
-            <span> &lt;/&gt; </span>
-          </div>
           <button
             onClick={() => {
               window.scrollTo(0, 0);

@@ -55,13 +55,10 @@ function Academics() {
             const result = res.data;
             setyearData(result);
             setisLoading(false);
-          } else if (res.status === 500) {
-            window.location = "/";
           }
         })
         .catch((error) => {
           console.log("errorrr", error);
-          window.location = "/";
         });
     } else {
       setyear(0);
