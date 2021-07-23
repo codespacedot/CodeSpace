@@ -24,18 +24,16 @@ function Academics() {
   const [oddSem, setoddSem] = useState(0);
   const [evenSem, setevenSem] = useState(0);
   const [yearData, setyearData] = useState([]);
-  const [gitLabLink, setgitLabLink] = useState(
-    `https://github.com/codespacedot/`
-  );
+  const gitLabLink = "https://github.com/codespacedot/";
+
   const classes = useStyles();
 
   useEffect(() => {
     console.log("year is", year);
     console.log("year data in ue is", yearData);
-
     getYear();
     console.log(yearData);
-  }, [year]);
+  });
   const getYear = () => {
     console.log(year);
     if (year !== null) {
