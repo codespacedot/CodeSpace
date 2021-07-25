@@ -290,18 +290,33 @@ h6 {
 
 /*------------------ Preloader -------------------*/
 
-#preloader {
+.loader {
   color: var(--clr-foreground);
   font-family: "kalam-bold";
+  font-weight: bold;
   font-size: 20vh;
-  opacity: 0.8;
+  background-color: var(--clr-background);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0px;
+  padding: 0px;
 }
-#preloader span {
+
+.loader span {
   display: inline-block;
   -webkit-animation: pulse 0.4s alternate infinite ease-in-out;
   animation: pulse 0.4s alternate infinite ease-in-out;
 }
-#preloader span:nth-child(odd) {
+.loader span:nth-child(odd) {
   -webkit-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }

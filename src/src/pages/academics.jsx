@@ -1,21 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/header";
-import { makeStyles } from "@material-ui/core/styles";
-import LinearProgress from "@material-ui/core/LinearProgress";
 import axios from "axios";
+import Preloader from "../components/preloader";
 import FooterCred from "../components/foot-cred";
 import { Offline, Online } from "react-detect-offline";
-
-//To set width of loading bar
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-
-    "& > * + *": {
-      marginTop: theme.spacing(0),
-    },
-  },
-}));
 
 //Academics component starts
 
@@ -27,8 +15,6 @@ function Academics() {
   const [evenSem, setevenSem] = useState(0);
   const [yearData, setyearData] = useState([]);
   const gitLabLink = "https://github.com/codespacedot/";
-
-  const classes = useStyles();
 
   //calling api based on selected year
   useEffect(() => {
@@ -74,8 +60,8 @@ function Academics() {
         {year === 0 ? (
           (window.location = "/")
         ) : isLoading ? (
-          <div className={classes.root}>
-            <LinearProgress color="primary" />
+          <div>
+            <Preloader />
           </div>
         ) : (
           <section class="card" id="year">
