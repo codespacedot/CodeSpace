@@ -55,15 +55,15 @@ function Academics() {
   //render of academics
   return (
     <div>
-      <Online>
-        {/* aplying loader logic here ,either we receiving data or not*/}
-        {isLoading ? (
-          <div>
-            <Preloader />
-          </div>
-        ) : (
-          // calling body of academics page
-          <div>
+      {/* aplying loader logic here ,either we receiving data or not*/}
+      {isLoading ? (
+        // <div>
+        <Preloader />
+      ) : (
+        // </div>
+        // calling body of academics page
+        <div>
+          <Online>
             <Header />
             <section class="card" id="year">
               <div class="container  align-items-center ">
@@ -217,11 +217,11 @@ function Academics() {
                 </div>
               </div>
             </section>
-          </div>
-        )}
-        {/* calling footer component from src-components-footer.js */}
-        <FooterCred />
-      </Online>
+          </Online>
+        </div>
+      )}
+      {/* calling footer component from src-components-footer.js */}
+      <FooterCred />
       <Offline>
         <center>
           <h1 style={{ color: "blue" }}>
