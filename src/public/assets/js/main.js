@@ -1,3 +1,57 @@
+const themeToggle = document.querySelector("#theme-toggle");
+
+function enableDarkMode() {
+  document.body.classList.remove("light-theme");
+  document.body.classList.add("dark-theme");
+  localStorage.setItem("Theme", "dark");
+}
+
+function enableLightMode() {
+  document.body.classList.remove("dark-theme");
+  document.body.classList.add("light-theme");
+  localStorage.setItem("Theme", "light");
+}
+
+function setThemePreference() {
+  var T = localStorage.getItem("Theme");
+  if (T == "dark") {
+    enableDarkMode();
+    return;
+  }
+  enableLightMode();
+}
+
+document.onload = setThemePreference();
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.contains("light-theme")
+    ? enableDarkMode()
+    : enableLightMode();
+});
+
+//pass Reset
+function passreset() {
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll(".needs-validation");
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms).forEach((form) => {
+    form.addEventListener(
+      "submit",
+      (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add("was-validated");
+      },
+      false
+    );
+  });
+}
+
+// Function triggered on page load
+
 (function () {
   "use strict";
 
@@ -94,44 +148,23 @@
     true
   );
 
-  /**
-   * Preloader
-   */
-  let preloader = select("#preloader");
-  if (preloader) {
-    window.addEventListener("load", () => {
-      preloader.remove();
-    });
-  }
+  //form validation
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll(".needs-validation");
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms).forEach((form) => {
+    form.addEventListener(
+      "submit",
+      (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add("was-validated");
+      },
+      false
+    );
+  });
 })();
-
-const themeToggle = document.querySelector("#theme-toggle");
-
-themeToggle.addEventListener("click", () => {
-  document.body.classList.contains("light-theme")
-    ? enableDarkMode()
-    : enableLightMode();
-});
-
-function enableDarkMode() {
-  document.body.classList.remove("light-theme");
-  document.body.classList.add("dark-theme");
-  localStorage.setItem("Theme", "dark");
-}
-
-function enableLightMode() {
-  document.body.classList.remove("dark-theme");
-  document.body.classList.add("light-theme");
-  localStorage.setItem("Theme", "light");
-}
-
-function setThemePreference() {
-  var T = localStorage.getItem("Theme");
-  if (T == "dark") {
-    enableDarkMode();
-    return;
-  }
-  enableLightMode();
-}
-
-document.onload = setThemePreference();
