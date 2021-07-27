@@ -1,11 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Footer_credit extends Component {
-  render() {
-    return (
+function Footermobile() {
+  return (
+    <div>
       <footer id="footer">
-        <div className="cred disable-select">
-          Connect. <span> Code. </span> Execute.
+        <div className=" d-lg-none d-xl-none">
+          <div className="cred disable-select">
+            Connect. <span> Code. </span> Execute.
+          </div>
         </div>
         <div className="footer-top">
           <div className="container">
@@ -155,17 +157,16 @@ class Footer_credit extends Component {
           </div>
         </div>
         <div>
-          <button
-            onClick={() => {
-              window.scrollTo(0, 0);
-            }}
+          <a
+            href="/"
             className="back-to-top d-flex align-items-center justify-content-center"
           >
             <i className="fa fa-arrow-up" />
-          </button>
+          </a>
         </div>
       </footer>
-    );
-  }
+    </div>
+  );
 }
-export default Footer_credit;
+
+export default Footermobile;

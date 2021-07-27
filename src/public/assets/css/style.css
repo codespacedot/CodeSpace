@@ -66,6 +66,10 @@
 .text {
   color: var(--clr-foreground);
 }
+::-webkit-calendar-picker-indicator {
+  filter: invert(25%) sepia(42%) saturate(4475%) hue-rotate(204deg)
+    brightness(93%) contrast(95%);
+}
 
 /*-------------- Theme Change ---------------*/
 
@@ -289,7 +293,6 @@ h6 {
 }
 
 /*------------------ Preloader -------------------*/
-
 .loader {
   color: var(--clr-foreground);
   font-family: "kalam-bold";
@@ -349,7 +352,7 @@ h6 {
 }
 
 #header .logo {
-  font-size: calc(2vh + 1vw);
+  font-size: calc(15px + 1vw);
   margin: 0;
   padding: 0;
   line-height: 1;

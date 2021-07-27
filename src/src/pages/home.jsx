@@ -26,7 +26,7 @@ class home extends Component {
               </div>
             </div>
             <a
-              href="csdot.ml"
+              href="/signup"
               className="get-started-btn2"
               style={{ marginBottom: "2%" }}
             >
