@@ -8,7 +8,7 @@ function header() {
           <a className="splogo" href="index.html">
             &lt;/&gt;
           </a>
-          <a href="index.html"> CodeSpace</a>
+          <a href="/"> CodeSpace</a>
         </h1>
         <nav id="navbar" className="navbar order-last order-lg-0">
           <ul>

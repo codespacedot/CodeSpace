@@ -14,7 +14,7 @@ class Footer extends Component {
                       {" "}
                       &lt;/&gt;{" "}
                     </a>
-                    <a className="sp text" href="index.html">
+                    <a className="sp text" href="/">
                       {" "}
                       CodeSpace{" "}
                     </a>
@@ -24,7 +24,12 @@ class Footer extends Component {
                     Execute.
                   </h4>
                   <div className="social-links text">
-                    <a href className="github text">
+                    <a
+                      href="https://github.com/codespacedot/CodeSpace"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="github text"
+                    >
                       <i className="fa fa-github large fa-2x" />
                     </a>
                   </div>
