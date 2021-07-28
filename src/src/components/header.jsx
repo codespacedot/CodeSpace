@@ -1,7 +1,6 @@
 //import "./App.css";
 
 function header() {
-  const { REACT_APP_HOST_NAME } = process.env;
   return (
     <header id="header" className="fixed-top">
       <div className="container d-flex align-items-center justify-content-lg-between">
@@ -84,12 +83,13 @@ function header() {
             </svg>
           </button>
         </div>
-        {window.location.href === `${REACT_APP_HOST_NAME}/signup` ||
-        window.location.href === `${REACT_APP_HOST_NAME}/` ? (
+        {console.log(window.location.pathname)}
+        {window.location.pathname === "/signup" ||
+        window.location.pathname === "/" ? (
           <a href="/login" className="get-started-btn">
             Log In
           </a>
-        ) : window.location.href === `${REACT_APP_HOST_NAME}/login` ? (
+        ) : window.location.pathname === "/login" ? (
           <a href="/signup" className="get-started-btn">
             Sign Up
           </a>
