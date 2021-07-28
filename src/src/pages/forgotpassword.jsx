@@ -1,8 +1,11 @@
 import React from "react";
+import Header from "../components/header";
+import Footermobile from "../components/footer-mobile";
 
 function Forgotpassword() {
   return (
     <div>
+      <Header />
       {/*  Section  */}
       <section className="form" id="form">
         <div className="d-flex align-items-center justify-content-center">
@@ -58,6 +61,7 @@ function Forgotpassword() {
         </div>
       </section>
       {/* End Section */}
+      <Footermobile />
     </div>
   );
 }
