@@ -157,12 +157,14 @@ function Footermobile() {
           </div>
         </div>
         <div>
-          <a
-            href="/"
+          <button
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
             className="back-to-top d-flex align-items-center justify-content-center"
           >
             <i className="fa fa-arrow-up" />
-          </a>
+          </button>
         </div>
       </footer>
     </div>
