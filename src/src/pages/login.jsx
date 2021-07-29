@@ -58,9 +58,13 @@ function Login() {
       dataForm.append("username", username);
       dataForm.append("password", encryptedPassword);
       axios
-        .post(`${REACT_APP_CS_API}/api/users/login`, dataForm, {
+        .request({
+          method: "POST",
+          url: `${REACT_APP_CS_API}/api/users/login`,
+          data: dataForm,
           headers: {
             "Content-Type": "multipart/form-data",
+            "Access-Control-Allow-Origin": "*",
           },
         })
         .then((res) => {
@@ -68,8 +72,13 @@ function Login() {
             sessionStorage.setItem("CS_TOKEN", res.data.access_token);
             const userToken = sessionStorage.getItem("CS_TOKEN");
             axios
-              .get(`${REACT_APP_CS_API}/api/users/me`, {
-                headers: { Authorization: `Bearer ${userToken}` },
+              .request({
+                method: "GET",
+                url: `${REACT_APP_CS_API}/api/users/me`,
+                headers: {
+                  Authorization: `Bearer ${userToken}`,
+                  "Access-Control-Allow-Origin": "*",
+                },
               })
               .then((resUser) => {
                 const userData = JSON.stringify(resUser.data);

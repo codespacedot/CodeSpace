@@ -75,11 +75,18 @@ function Signup() {
       hash.update(cpassword);
       const encryptedPassword = hash.hex();
       axios
-        .post(`${REACT_APP_CS_API}/api/users/create`, {
-          email: email,
-          first_name: firstName,
-          last_name: lastName,
-          password: encryptedPassword,
+        .request({
+          method: "POST",
+          url: `${REACT_APP_CS_API}/api/users/create`,
+          data: {
+            email: email,
+            first_name: firstName,
+            last_name: lastName,
+            password: encryptedPassword,
+          },
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
         })
         .then((res) => {
           if (res.status === 201) {

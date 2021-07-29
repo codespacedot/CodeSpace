@@ -85,7 +85,8 @@ function header() {
         </div>
         {console.log(window.location.pathname)}
         {window.location.pathname === "/signup" ||
-        window.location.pathname === "/" ? (
+        window.location.pathname === "/" ||
+        window.location.pathname === "forgot-password" ? (
           <a href="/login" className="get-started-btn">
             Log In
           </a>
