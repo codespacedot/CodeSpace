@@ -94,7 +94,7 @@ function Login() {
                 const userData = JSON.stringify(resUser.data);
                 setisLoading(false);
                 sessionStorage.setItem("USER_PROFILE", userData);
-                window.location = "/";
+                window.location = "/profile";
               })
               .catch((error) => {});
           }

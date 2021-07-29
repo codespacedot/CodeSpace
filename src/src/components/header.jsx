@@ -83,8 +83,7 @@ function header() {
           <a href="/signup" className="get-started-btn">
             Sign Up
           </a>
-        ) : sessionStorage.getItem("CS_TOKEN") !== null &&
-          window.location.pathname === "/profile" ? (
+        ) : window.location.pathname === "/profile" ? (
           <a
             href="/login"
             onClick={() => {
