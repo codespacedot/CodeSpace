@@ -12,11 +12,11 @@ function header() {
         </h1>
         <nav id="navbar" className="navbar order-last order-lg-0">
           <ul>
-            <li>
+            {/* <li>
               <a className="nav-link" href="/">
                 Home
               </a>
-            </li>
+            </li> */}
             <li className="dropdown">
               <a href="/">
                 <span>Academics</span>
@@ -83,30 +83,57 @@ function header() {
             </svg>
           </button>
         </div>
-        {console.log(window.location.pathname)}
-        {window.location.pathname === "/signup" ||
-        window.location.pathname === "/" ||
-        window.location.pathname === "forgot-password" ? (
-          <a href="/login" className="get-started-btn">
-            Log In
-          </a>
-        ) : window.location.pathname === "/login" ? (
-          <a href="/signup" className="get-started-btn">
-            Sign Up
-          </a>
-        ) : sessionStorage.getItem("USER_PROFILE") !== "" ||
-          sessionStorage.getItem("USER_PROFILE") !== null ? (
-          <a
-            href="/login"
-            onClick={() => {
-              sessionStorage.removeItem("CS_TOKEN");
-              sessionStorage.removeItem("USER_PROFILE");
-            }}
-            className="get-started-btn"
-          >
-            Logout
-          </a>
-        ) : null}
+        {
+          sessionStorage.getItem("CS_TOKEN") === null &&
+          window.location.pathname === "/login" ? (
+            <a href="/signup" className="get-started-btn">
+              Sign Up
+            </a>
+          ) : sessionStorage.getItem("CS_TOKEN") !== null &&
+            window.location.pathname === "/profile" ? (
+            <a
+              href="/login"
+              onClick={() => {
+                sessionStorage.removeItem("CS_TOKEN");
+                sessionStorage.removeItem("USER_PROFILE");
+              }}
+              className="get-started-btn"
+            >
+              Log out
+            </a>
+          ) : sessionStorage.getItem("CS_TOKEN") !== null ? (
+            <a href="/profile" className="get-started-btn">
+              Profile
+            </a>
+          ) : (
+            <a href="/login" className="get-started-btn">
+              Log In
+            </a>
+          )
+          // window.location.pathname === "/signup" ||
+          // window.location.pathname === "/" ||
+          // window.location.pathname === "forgot-password" ? (
+          //   <a href="/login" className="get-started-btn">
+          //     Log In
+          //   </a>
+          // ) : window.location.pathname === "/login" ? (
+          //   <a href="/signup" className="get-started-btn">
+          //     Sign Up
+          //   </a>
+          // ) : sessionStorage.getItem("USER_PROFILE") !== "" ||
+          //   sessionStorage.getItem("USER_PROFILE") !== null ? (
+          //   <a
+          //     href="/login"
+          //     onClick={() => {
+          //       sessionStorage.removeItem("CS_TOKEN");
+          //       sessionStorage.removeItem("USER_PROFILE");
+          //     }}
+          //     className="get-started-btn"
+          //   >
+          //     Logout
+          //   </a>
+          // ) : null
+        }
       </div>
     </header>
   );

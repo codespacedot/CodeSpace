@@ -17,7 +17,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+//Signup component starts from here
 function Signup() {
+  //Maintain all states which are used for sign up form validation
   const [isLoading, setisLoading] = useState(false);
   const [toggleEye, setToggleeye] = useState(false);
   const [toggleEye1, setToggleeye1] = useState(false);
@@ -33,6 +35,8 @@ function Signup() {
   const [cpassword, setcpassword] = useState("");
   const regEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
   const classes = useStyles();
+
+  //To validate form and create user
   const signUpUser = () => {
     if (
       firstName === "" &&
@@ -69,11 +73,15 @@ function Signup() {
       setemailError("");
       setpswdError("");
       setcpassError("");
+
+      //Taking environment variables
       const { REACT_APP_SHA_KEY, REACT_APP_CS_API } = process.env;
       const hash = sha256.create();
       hash.update(REACT_APP_SHA_KEY);
       hash.update(cpassword);
       const encryptedPassword = hash.hex();
+
+      //To make api call for student registration
       axios
         .request({
           method: "POST",
@@ -105,6 +113,7 @@ function Signup() {
         });
     }
   };
+  //function to check email is valid or not
   const checkEmail = (e) => {
     setEmail(e);
     if (e.match(regEmail)) {
@@ -112,6 +121,7 @@ function Signup() {
     } else setemailError("Please enter valid email address");
   };
 
+  //function to check password fields,either matching or not
   const checkPassword = (e) => {
     setcpassword(e);
     if (password !== cpassword) {
@@ -120,230 +130,265 @@ function Signup() {
       setcpassError("");
     }
   };
+
+  //render of signup
   return (
     <div>
-      <div className={classes.root}>
-        <LinearProgress
-          color="primary"
-          className={isLoading ? "d-block" : "d-none"}
-        />
-      </div>
-      <Header />
-      <section className="form" id="form">
-        <div className="d-flex align-items-center justify-content-center">
-          <div className="col-lg-6 col-xl-6 d-none d-lg-block   left-content">
-            {" "}
-            <div className="row justify-content-center disable-select">
-              <div className="col-lg-6 col-md-12" style={{ marginTop: "7%" }}>
-                <h1 className="sptext">Connect.</h1>
-                <h1 className="sptext" style={{ color: "#0761d1" }}>
-                  Code.
-                </h1>
-                <h1 className="sptext">Execute.</h1>
+      {/* Checking user is logged in or not */}
+      {sessionStorage.getItem("CS_TOKEN") !== null ? (
+        window.history.back()
+      ) : (
+        <div>
+          {/* Loader after click on sign up button */}
+          <div className={classes.root}>
+            <LinearProgress
+              color="primary"
+              className={isLoading ? "d-block" : "d-none"}
+            />
+          </div>
+
+          {/* Header component calling */}
+          <Header />
+          <section className="form" id="form">
+            {/* Main sign up form body */}
+            <div className="d-flex align-items-center justify-content-center">
+              <div className="col-lg-6 col-xl-6 d-none d-lg-block   left-content">
+                {" "}
+                <div className="row justify-content-center disable-select">
+                  <div
+                    className="col-lg-6 col-md-12"
+                    style={{ marginTop: "7%" }}
+                  >
+                    <h1 className="sptext">Connect.</h1>
+                    <h1 className="sptext" style={{ color: "#0761d1" }}>
+                      Code.
+                    </h1>
+                    <h1 className="sptext">Execute.</h1>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
+                <form className="row g-2 needs-validation">
+                  <div className="justify-content-center heading ">
+                    <div className="col-12 col-lg-10 col-md-12 bottom ">
+                      <h1 className="sp">Sign Up</h1>
+                    </div>
+                  </div>
+                  <div className=" col-6 col-lg-5 col-md-6 bottom ">
+                    <div className="form-outline">
+                      <input
+                        type="text"
+                        style={
+                          firstName.length < 1 && fnameError !== ""
+                            ? { borderColor: "#dc3545" }
+                            : null || firstName.length > 0
+                            ? { borderColor: "#198754" }
+                            : null
+                        }
+                        className="form-control"
+                        placeholder="First Name"
+                        required
+                        onChange={(e) => {
+                          setfName(e.target.value);
+                          setfnameError("");
+                        }}
+                      />
+                      <div
+                        style={fnameError !== "" ? { color: "#dc3545" } : null}
+                      >
+                        {fnameError}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-6 col-lg-5 col-md-6 bottom ">
+                    <div className="form-outline ">
+                      <input
+                        type="text"
+                        style={
+                          lastName.length < 1 && lnameError !== ""
+                            ? { borderColor: "#dc3545" }
+                            : null || lastName.length > 0
+                            ? { borderColor: "#198754" }
+                            : null
+                        }
+                        className="form-control"
+                        id="validationCustom02"
+                        placeholder="Last Name"
+                        required
+                        onChange={(e) => {
+                          setlName(e.target.value);
+                          setlnameError("");
+                        }}
+                      />
+                      <div
+                        style={lnameError !== "" ? { color: "#dc3545" } : null}
+                      >
+                        {lnameError}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-12 col-lg-10 col-md-12 bottom">
+                    <div className="form-outline ">
+                      <input
+                        type="email"
+                        style={
+                          emailError !== ""
+                            ? { borderColor: "#dc3545" }
+                            : null ||
+                              (email.match(regEmail) && email.length > 0)
+                            ? { borderColor: "#198754" }
+                            : null
+                        }
+                        className="form-control"
+                        placeholder="Email Address"
+                        required
+                        onChange={(e) => checkEmail(e.target.value)}
+                      />
+                      <div
+                        style={emailError !== "" ? { color: "#dc3545" } : null}
+                      >
+                        {emailError}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-12 col-lg-10 col-md-12 bottom">
+                    <div className="form-outline ">
+                      <div className="input-group mb-2">
+                        <input
+                          type={!toggleEye ? "password" : "text"}
+                          className="form-control"
+                          style={
+                            password.length < 7 && pswdError !== ""
+                              ? { borderColor: "#dc3545" }
+                              : null ||
+                                (password.length > 7 && pswdError === "")
+                              ? { borderColor: "#198754" }
+                              : null
+                          }
+                          placeholder="Password"
+                          minLength={8}
+                          maxLength={12}
+                          required
+                          onChange={(e) => {
+                            if (e.target.value.length > 7) {
+                              setpassword(e.target.value);
+                              setpswdError("");
+                            } else {
+                              setpswdError(
+                                "Password must be greater than 8 characters"
+                              );
+                            }
+                          }}
+                        />
+                        <span class="input-group-text ">
+                          {" "}
+                          <button
+                            class="pass-link"
+                            type="button"
+                            onClick={() => setToggleeye(!toggleEye)}
+                          >
+                            <i
+                              id="pass-show"
+                              class={
+                                toggleEye ? "fa fa-eye" : "fa fa-eye-slash"
+                              }
+                              aria-hidden={toggleEye}
+                            ></i>
+                          </button>
+                        </span>
+                      </div>
+                      <div
+                        style={pswdError !== "" ? { color: "#dc3545" } : null}
+                      >
+                        {pswdError}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-12 col-lg-10 col-md-12 bottom">
+                    <div className="form-outline ">
+                      <div className="input-group mb-2">
+                        <input
+                          type={!toggleEye1 ? "password" : "text"}
+                          className="form-control"
+                          style={
+                            cpassword.length < 7 && cpassError !== ""
+                              ? { borderColor: "#dc3545" }
+                              : null ||
+                                (cpassword.length > 7 && cpassError === "")
+                              ? { borderColor: "#198754" }
+                              : null
+                          }
+                          placeholder="Confirm Password"
+                          minLength={8}
+                          maxLength={12}
+                          required
+                          onChange={(e) => {
+                            if (
+                              e.target.value.length > 7 &&
+                              password === e.target.value
+                            ) {
+                              checkPassword(e.target.value);
+                              setcpassError("");
+                            } else {
+                              setcpassError("Password does not match");
+                            }
+                          }}
+                        />
+                        <span class="input-group-text ">
+                          {" "}
+                          <button
+                            class="pass-link"
+                            type="button"
+                            onClick={() => setToggleeye1(!toggleEye1)}
+                          >
+                            <i
+                              id="pass-show"
+                              class={
+                                toggleEye1 ? "fa fa-eye" : "fa fa-eye-slash"
+                              }
+                              aria-hidden={toggleEye1}
+                            ></i>
+                          </button>
+                        </span>
+                      </div>
+                      <div
+                        style={cpassError !== "" ? { color: "#dc3545" } : null}
+                      >
+                        {cpassError}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-12 col-lg-10 col-md-12 bottom">
+                    <input
+                      className="submit-btn btn"
+                      type="button"
+                      value="Sign Up"
+                      onClick={signUpUser}
+                    />
+                  </div>
+                  <div className="col-12 col-lg-10 col-md-12 bottom form-link  align-items-center justify-content-center">
+                    <p>
+                      <a href="/login">
+                        Already have an account? <span>Log In</span>
+                      </a>
+                      <br />
+                      <a href="terms.html">
+                        {" "}
+                        By Signing Up you agree with our <span>
+                          Terms{" "}
+                        </span> and <span>Data Privacy</span>.
+                      </a>
+                    </p>
+                  </div>
+                </form>
               </div>
             </div>
-          </div>
-          <div className="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
-            <form className="row g-2 needs-validation">
-              <div className="justify-content-center heading ">
-                <div className="col-12 col-lg-10 col-md-12 bottom ">
-                  <h1 className="sp">Sign Up</h1>
-                </div>
-              </div>
-              <div className=" col-6 col-lg-5 col-md-6 bottom ">
-                <div className="form-outline">
-                  <input
-                    type="text"
-                    style={
-                      firstName.length < 1 && fnameError !== ""
-                        ? { borderColor: "#dc3545" }
-                        : null || firstName.length > 0
-                        ? { borderColor: "#198754" }
-                        : null
-                    }
-                    className="form-control"
-                    placeholder="First Name"
-                    required
-                    onChange={(e) => {
-                      setfName(e.target.value);
-                      setfnameError("");
-                    }}
-                  />
-                  <div style={fnameError !== "" ? { color: "#dc3545" } : null}>
-                    {fnameError}
-                  </div>
-                </div>
-              </div>
-              <div className="col-6 col-lg-5 col-md-6 bottom ">
-                <div className="form-outline ">
-                  <input
-                    type="text"
-                    style={
-                      lastName.length < 1 && lnameError !== ""
-                        ? { borderColor: "#dc3545" }
-                        : null || lastName.length > 0
-                        ? { borderColor: "#198754" }
-                        : null
-                    }
-                    className="form-control"
-                    id="validationCustom02"
-                    placeholder="Last Name"
-                    required
-                    onChange={(e) => {
-                      setlName(e.target.value);
-                      setlnameError("");
-                    }}
-                  />
-                  <div style={lnameError !== "" ? { color: "#dc3545" } : null}>
-                    {lnameError}
-                  </div>
-                </div>
-              </div>
-              <div className="col-12 col-lg-10 col-md-12 bottom">
-                <div className="form-outline ">
-                  <input
-                    type="email"
-                    style={
-                      emailError !== ""
-                        ? { borderColor: "#dc3545" }
-                        : null || (email.match(regEmail) && email.length > 0)
-                        ? { borderColor: "#198754" }
-                        : null
-                    }
-                    className="form-control"
-                    placeholder="Email Address"
-                    required
-                    onChange={(e) => checkEmail(e.target.value)}
-                  />
-                  <div style={emailError !== "" ? { color: "#dc3545" } : null}>
-                    {emailError}
-                  </div>
-                </div>
-              </div>
-              <div className="col-12 col-lg-10 col-md-12 bottom">
-                <div className="form-outline ">
-                  <div className="input-group mb-2">
-                    <input
-                      type={!toggleEye ? "password" : "text"}
-                      className="form-control"
-                      style={
-                        password.length < 7 && pswdError !== ""
-                          ? { borderColor: "#dc3545" }
-                          : null || (password.length > 7 && pswdError === "")
-                          ? { borderColor: "#198754" }
-                          : null
-                      }
-                      placeholder="Password"
-                      minLength={8}
-                      maxLength={12}
-                      required
-                      onChange={(e) => {
-                        if (e.target.value.length > 7) {
-                          setpassword(e.target.value);
-                          setpswdError("");
-                        } else {
-                          setpswdError(
-                            "Password must be greater than 8 characters"
-                          );
-                        }
-                      }}
-                    />
-                    <span class="input-group-text ">
-                      {" "}
-                      <button
-                        class="pass-link"
-                        type="button"
-                        onClick={() => setToggleeye(!toggleEye)}
-                      >
-                        <i
-                          id="pass-show"
-                          class={toggleEye ? "fa fa-eye" : "fa fa-eye-slash"}
-                          aria-hidden={toggleEye}
-                        ></i>
-                      </button>
-                    </span>
-                  </div>
-                  <div style={pswdError !== "" ? { color: "#dc3545" } : null}>
-                    {pswdError}
-                  </div>
-                </div>
-              </div>
-              <div className="col-12 col-lg-10 col-md-12 bottom">
-                <div className="form-outline ">
-                  <div className="input-group mb-2">
-                    <input
-                      type={!toggleEye1 ? "password" : "text"}
-                      className="form-control"
-                      style={
-                        cpassword.length < 7 && cpassError !== ""
-                          ? { borderColor: "#dc3545" }
-                          : null || (cpassword.length > 7 && cpassError === "")
-                          ? { borderColor: "#198754" }
-                          : null
-                      }
-                      placeholder="Confirm Password"
-                      minLength={8}
-                      maxLength={12}
-                      required
-                      onChange={(e) => {
-                        if (
-                          e.target.value.length > 7 &&
-                          password === e.target.value
-                        ) {
-                          checkPassword(e.target.value);
-                          setcpassError("");
-                        } else {
-                          setcpassError("Password does not match");
-                        }
-                      }}
-                    />
-                    <span class="input-group-text ">
-                      {" "}
-                      <button
-                        class="pass-link"
-                        type="button"
-                        onClick={() => setToggleeye1(!toggleEye1)}
-                      >
-                        <i
-                          id="pass-show"
-                          class={toggleEye1 ? "fa fa-eye" : "fa fa-eye-slash"}
-                          aria-hidden={toggleEye1}
-                        ></i>
-                      </button>
-                    </span>
-                  </div>
-                  <div style={cpassError !== "" ? { color: "#dc3545" } : null}>
-                    {cpassError}
-                  </div>
-                </div>
-              </div>
-              <div className="col-12 col-lg-10 col-md-12 bottom">
-                <input
-                  className="submit-btn btn"
-                  type="button"
-                  value="Sign Up"
-                  onClick={signUpUser}
-                />
-              </div>
-              <div className="col-12 col-lg-10 col-md-12 bottom form-link  align-items-center justify-content-center">
-                <p>
-                  <a href="/login">
-                    Already have an account? <span>Log In</span>
-                  </a>
-                  <br />
-                  <a href="terms.html">
-                    {" "}
-                    By Signing Up you agree with our <span>
-                      Terms{" "}
-                    </span> and <span>Data Privacy</span>.
-                  </a>
-                </p>
-              </div>
-            </form>
-          </div>
+          </section>
+
+          {/* Footer component for signup screen */}
+          <Footermobile />
         </div>
-      </section>
-      <Footermobile />
+      )}
     </div>
   );
 }
