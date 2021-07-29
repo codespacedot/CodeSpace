@@ -83,9 +83,28 @@ function header() {
             </svg>
           </button>
         </div>
-        <a href="/login" className="get-started-btn">
-          Log In
-        </a>
+        {window.location.href === "http://localhost:3000/signup" ||
+        window.location.href === "http://localhost:3000/" ? (
+          <a href="/login" className="get-started-btn">
+            Log In
+          </a>
+        ) : window.location.href === "http://localhost:3000/login" ? (
+          <a href="/signup" className="get-started-btn">
+            Sign Up
+          </a>
+        ) : sessionStorage.getItem("USER_PROFILE") !== "" ||
+          sessionStorage.getItem("USER_PROFILE") !== null ? (
+          <a
+            href="/login"
+            onClick={() => {
+              sessionStorage.removeItem("CS_TOKEN");
+              sessionStorage.removeItem("USER_PROFILE");
+            }}
+            className="get-started-btn"
+          >
+            Logout
+          </a>
+        ) : null}
       </div>
     </header>
   );
