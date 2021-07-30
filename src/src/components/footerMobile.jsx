@@ -1,6 +1,6 @@
 import React from "react";
 
-function Footermobile() {
+function FooterMobile() {
   return (
     <div>
       <footer id="footer">
@@ -171,4 +171,4 @@ function Footermobile() {
   );
 }
 
-export default Footermobile;
+export default FooterMobile;

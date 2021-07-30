@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Header from "../components/header";
-import Footermobile from "../components/footer-mobile";
+import FooterMobile from "../components/footerMobile";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import CommonToast from "../components/commontoast";
+import Toast from "../components/toast";
 
 //To set width of loading bar
 const useStyles = makeStyles((theme) => ({
@@ -17,11 +17,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Forgotpassword() {
-  const [username, setusername] = useState("");
-  const [isLoading, setisLoading] = useState(false);
-  const [usernameError, setusernameError] = useState("");
-  const [toastVisible, settoastVisible] = useState(false);
+function ForgotPassword() {
+  const [username, setUsername] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [usernameError, setUsernameError] = useState("");
+  const [toastVisible, setToastVisible] = useState(false);
   const [toastError, setToastError] = useState("");
   const regEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
   const classes = useStyles();
@@ -29,22 +29,22 @@ function Forgotpassword() {
   //Taking environment variables
   const { REACT_APP_CS_API } = process.env;
 
-  //Function to check and validateb email
+  //Function to check and validate email
   const checkEmail = (e) => {
-    setusername(e);
+    setUsername(e);
     if (e.match(regEmail)) {
-      setusernameError("");
-    } else setusernameError("Please enter valid email address.");
+      setUsernameError("");
+    } else setUsernameError("Please enter valid email address.");
   };
 
   //send verification code to registered mail
   const sendEmail = () => {
     if (username === "") {
-      setusernameError("This Field is required");
+      setUsernameError("This Field is required");
     } else if (username.length > 0 && !username.match(regEmail)) {
-      setusernameError("Please enter valid email address.");
+      setUsernameError("Please enter valid email address.");
     } else {
-      setisLoading(true);
+      setIsLoading(true);
       axios
         .request({
           url: `${REACT_APP_CS_API}/api/users/password/forgot`,
@@ -56,23 +56,23 @@ function Forgotpassword() {
         })
         .then((res) => {
           if (res.status === 200) {
-            setisLoading(false);
+            setIsLoading(false);
             window.location = "/reset-password";
           } else {
-            setisLoading(false);
-            settoastVisible(true);
+            setIsLoading(false);
+            setToastVisible(true);
             setToastError("User does not exists.");
             setTimeout(() => {
-              settoastVisible(false);
+              setToastVisible(false);
             }, 3000);
           }
         })
         .catch((error) => {
-          setisLoading(false);
-          settoastVisible(true);
+          setIsLoading(false);
+          setToastVisible(true);
           setToastError("User does not exists.");
           setTimeout(() => {
-            settoastVisible(false);
+            setToastVisible(false);
           }, 3000);
         });
     }
@@ -127,8 +127,7 @@ function Forgotpassword() {
                         style={
                           usernameError !== ""
                             ? { borderColor: "#dc3545" }
-                            : null ||
-                              (username.match(regEmail) && username.length > 0)
+                            : (username.match(regEmail) && username.length > 0)
                             ? { borderColor: "#198754" }
                             : null
                         }
@@ -159,7 +158,7 @@ function Forgotpassword() {
                   <div>
                     {toastVisible ? (
                       <div>
-                        <CommonToast
+                        <Toast
                           open={toastVisible}
                           backgroundColor="#e00"
                           type="error"
@@ -180,11 +179,11 @@ function Forgotpassword() {
             </div>
           </section>
           {/* End Section */}
-          <Footermobile />
+          <FooterMobile />
         </div>
       )}
     </div>
   );
 }
 
-export default Forgotpassword;
+export default ForgotPassword;

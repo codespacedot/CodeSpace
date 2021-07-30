@@ -18,27 +18,27 @@ const useStyles = makeStyles((theme) => ({
 
 function Profile() {
   const classes = useStyles();
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const userData = sessionStorage.getItem("USER_PROFILE");
   const parseUserData = JSON.parse(userData);
   const userToken = sessionStorage.getItem("CS_TOKEN");
   const { REACT_APP_CS_API } = process.env;
 
   const deleteAccount = () => {
-    setisLoading(true);
+    setIsLoading(true);
     axios
       .delete(`${REACT_APP_CS_API}/api/users/delete`, {
         headers: { Authorization: `Bearer ${userToken}` },
       })
       .then((res) => {
         if (res.status === 200) {
-          setisLoading(false);
+          setIsLoading(false);
           sessionStorage.removeItem("CS_TOKEN");
           sessionStorage.removeItem("USER_PROFILE");
           window.location = "/login";
         }
       })
-      .catch((error) => {});
+      .catch((_) => {});
   };
   return (
     <div>

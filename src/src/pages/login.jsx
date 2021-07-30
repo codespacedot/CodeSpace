@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Header from "../components/header";
-import Footermobile from "../components/footer-mobile";
+import FooterMobile from "../components/footerMobile";
 import axios from "axios";
 import { sha256 } from "js-sha256";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import CommonToast from "../components/commontoast";
+import Toast from "../components/toast";
 const formData = require("form-data");
 
 //To set width of loading bar
@@ -21,42 +21,42 @@ const useStyles = makeStyles((theme) => ({
 
 //Login component starts from here..
 function Login() {
-  const [toggleEye, setToggleeye] = useState(false);
-  const [username, setusername] = useState("");
-  const [password, setpassword] = useState("");
-  const [usernameError, setusernameError] = useState("");
-  const [passwordError, setpasswordError] = useState("");
-  const [isLoading, setisLoading] = useState(false);
+  const [toggleEye, setToggleEye] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const regEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-  const [toastVisible, settoastVisible] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
   const [toastError, setToastError] = useState("");
 
   const classes = useStyles();
 
-  //Function to check and validateb email
+  //Function to check and validate email
   const checkEmail = (e) => {
-    setusername(e);
+    setUsername(e);
     if (e.match(regEmail)) {
-      setusernameError("");
-    } else setusernameError("Please enter valid email address");
+      setUsernameError("");
+    } else setUsernameError("Please enter valid email address");
   };
 
   //Function for Login student
   const logInUser = () => {
-    //checking all fields are properely filled or not
+    //checking all fields are properly filled or not
     if (username === "" && password === "") {
-      setusernameError("This field is required");
-      setpasswordError("This field is required");
+      setUsernameError("This field is required");
+      setPasswordError("This field is required");
     } else if (username === "") {
-      setusernameError("This field is required");
+      setUsernameError("This field is required");
     } else if (password === "") {
-      setpasswordError("This field is required");
+      setPasswordError("This field is required");
     } else if (username.length > 0 && !username.match(regEmail)) {
-      setusernameError("Please enter valid email address");
+      setUsernameError("Please enter valid email address");
     } else {
-      setisLoading(true);
-      setusernameError("");
-      setpasswordError("");
+      setIsLoading(true);
+      setUsernameError("");
+      setPasswordError("");
 
       //Taking environment variables
       const { REACT_APP_SHA_KEY, REACT_APP_CS_API } = process.env;
@@ -96,7 +96,7 @@ function Login() {
               })
               .then((resUser) => {
                 const userData = JSON.stringify(resUser.data);
-                setisLoading(false);
+                setIsLoading(false);
                 sessionStorage.setItem("USER_PROFILE", userData);
                 window.location = "/profile";
               })
@@ -105,18 +105,18 @@ function Login() {
         })
         .catch((error) => {
           if (error.response.data.detail.ERROR === "Invalid credentials.") {
-            setisLoading(false);
-            settoastVisible(true);
+            setIsLoading(false);
+            setToastVisible(true);
             setToastError("Invalid credentials.");
             setTimeout(() => {
-              settoastVisible(false);
+              setToastVisible(false);
             }, 3000);
           } else {
-            setisLoading(false);
-            settoastVisible(true);
+            setIsLoading(false);
+            setToastVisible(true);
             setToastError("Error ! Please try again.");
             setTimeout(() => {
-              settoastVisible(false);
+              setToastVisible(false);
             }, 3000);
           }
         });
@@ -169,8 +169,7 @@ function Login() {
                         style={
                           usernameError !== ""
                             ? { borderColor: "#dc3545" }
-                            : null ||
-                              (username.match(regEmail) && username.length > 0)
+                            : (username.match(regEmail) && username.length > 0)
                             ? { borderColor: "#198754" }
                             : null
                         }
@@ -200,18 +199,17 @@ function Login() {
                           style={
                             password.length < 7 && passwordError !== ""
                               ? { borderColor: "#dc3545" }
-                              : null ||
-                                (password.length > 7 && passwordError === "")
+                              : (password.length > 7 && passwordError === "")
                               ? { borderColor: "#198754" }
                               : null
                           }
                           placeholder="Password"
                           onChange={(e) => {
                             if (e.target.value.length > 7) {
-                              setpassword(e.target.value);
-                              setpasswordError("");
+                              setPassword(e.target.value);
+                              setPasswordError("");
                             } else {
-                              setpasswordError(
+                              setPasswordError(
                                 "Password must be greater than 8 characters"
                               );
                             }
@@ -223,7 +221,7 @@ function Login() {
                           <button
                             class="pass-link"
                             type="button"
-                            onClick={() => setToggleeye(!toggleEye)}
+                            onClick={() => setToggleEye(!toggleEye)}
                           >
                             <i
                               id="pass-show"
@@ -257,7 +255,7 @@ function Login() {
                     {toastVisible &&
                     toastError === "Error ! Please try again." ? (
                       <div>
-                        <CommonToast
+                        <Toast
                           open={toastVisible}
                           backgroundColor="#e00"
                           message={toastError}
@@ -269,7 +267,7 @@ function Login() {
                   <div>
                     {toastVisible && toastError === "Invalid credentials." ? (
                       <div>
-                        <CommonToast
+                        <Toast
                           open={toastVisible}
                           backgroundColor="#e00"
                           type="error"
@@ -294,7 +292,7 @@ function Login() {
             </div>
           </section>
           {/* Calling footer for login screen */}
-          <Footermobile />
+          <FooterMobile />
         </div>
       )}
     </div>
