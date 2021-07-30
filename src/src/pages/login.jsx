@@ -100,7 +100,7 @@ function Login() {
                 sessionStorage.setItem("USER_PROFILE", userData);
                 window.location = "/profile";
               })
-              .catch((error) => {});
+              .catch((_) => {});
           }
         })
         .catch((error) => {
