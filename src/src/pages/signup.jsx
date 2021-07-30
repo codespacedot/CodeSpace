@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Header from "../components/header";
-import Footermobile from "../components/footer-mobile";
+import FooterMobile from "../components/footerMobile";
 import axios from "axios";
 import { sha256 } from "js-sha256";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import CommonToast from "../components/commontoast";
+import Toast from "../components/toast";
 
 //To set width of loading bar
 const useStyles = makeStyles((theme) => ({
@@ -21,71 +21,71 @@ const useStyles = makeStyles((theme) => ({
 //Signup component starts from here
 function Signup() {
   //Maintain all states which are used for sign up form validation
-  const [isLoading, setisLoading] = useState(false);
-  const [toggleEye, setToggleeye] = useState(false);
-  const [toggleEye1, setToggleeye1] = useState(false);
-  const [fnameError, setfnameError] = useState("");
-  const [lnameError, setlnameError] = useState("");
-  const [firstName, setfName] = useState("");
-  const [lastName, setlName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [toggleEye, setToggleEye] = useState(false);
+  const [toggleEye1, setToggleEye1] = useState(false);
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [emailError, setemailError] = useState("");
-  const [pswdError, setpswdError] = useState("");
-  const [cpassError, setcpassError] = useState("");
-  const [password, setpassword] = useState("");
-  const [cpassword, setcpassword] = useState("");
-  const [toastVisible, settoastVisible] = useState(false);
-  const [toastError, setToastError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
   const regEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 
   const classes = useStyles();
 
-  //To validate form and create user
+  //Validate form and create user
   const signUpUser = () => {
     if (
       firstName === "" &&
       lastName === "" &&
       email === "" &&
       password === "" &&
-      cpassword === ""
+      confirmPassword === ""
     ) {
-      setfnameError("This field is required");
-      setlnameError("This field is required");
-      setemailError("This field is required");
-      setpswdError("This field is required");
-      setcpassError("This field is required");
+      setFirstNameError("This field is required");
+      setLastNameError("This field is required");
+      setEmailError("This field is required");
+      setPasswordError("This field is required");
+      setConfirmPasswordError("This field is required");
     } else if (firstName === "") {
-      setfnameError("This field is required");
+      setFirstNameError("This field is required");
     } else if (lastName === "") {
-      setlnameError("This field is required");
+      setLastNameError("This field is required");
     } else if (email === "") {
-      setemailError("This field is required");
+      setEmailError("This field is required");
     } else if (email.length > 0 && !email.match(regEmail)) {
-      setemailError("Please enter valid email address");
+      setEmailError("Please enter valid email address");
     } else if (password === "") {
-      setpswdError("This field is required");
+      setPasswordError("This field is required");
     } else if (password.length < 8) {
-      setpswdError("Password must be greater than 8 characters");
-    } else if (cpassword === "") {
-      setcpassError("This field is required");
-    } else if (cpassword !== password) {
-      setcpassError("Password does not match");
+      setPasswordError("Password must be greater than 8 characters");
+    } else if (confirmPassword === "") {
+      setConfirmPasswordError("This field is required");
+    } else if (confirmPassword !== password) {
+      setConfirmPasswordError("Password does not match");
     } else {
-      setisLoading(true);
-      setfnameError("");
-      setlnameError("");
-      setemailError("");
-      setpswdError("");
-      setcpassError("");
+      setIsLoading(true);
+      setFirstNameError("");
+      setLastNameError("");
+      setEmailError("");
+      setPasswordError("");
+      setConfirmPasswordError("");
 
       //Taking environment variables
       const { REACT_APP_SHA_KEY, REACT_APP_CS_API } = process.env;
       const hash = sha256.create();
       hash.update(REACT_APP_SHA_KEY);
-      hash.update(cpassword);
+      hash.update(confirmPassword);
       const encryptedPassword = hash.hex();
 
-      //To make api call for student registration
+      //Make api call for student registration
       axios
         .request({
           method: "POST",
@@ -102,30 +102,26 @@ function Signup() {
         })
         .then((res) => {
           if (res.status === 201) {
-            setisLoading(false);
-            settoastVisible(true);
-            setToastError("Account created successfully! Redirecting ...");
+            setIsLoading(false);
+            setToastVisible(true);
+            setToastMessage("Account created successfully.");
             setTimeout(() => {
-              settoastVisible(false);
+              setToastVisible(false);
               window.location = "/login";
-            }, 3000);
+            }, 2500);
           }
         })
         .catch((error) => {
+          setIsLoading(false);
+          setToastVisible(true);
           if (error.response.data.detail.ERROR === "User already exists.") {
-            setisLoading(false);
-            settoastVisible(true);
-            setToastError("Email address already registered.");
-            setTimeout(() => {
-              settoastVisible(false);
-            }, 3000);
+            setToastMessage("Account already exists.");
           } else {
-            setisLoading(false);
-            setToastError("Error! Please try again.");
-            setTimeout(() => {
-              settoastVisible(false);
-            }, 3000);
+            setToastMessage("Error! please try again.");
           }
+          setTimeout(() => {
+            setToastVisible(false);
+          }, 2500);
         });
     }
   };
@@ -133,17 +129,17 @@ function Signup() {
   const checkEmail = (e) => {
     setEmail(e);
     if (e.match(regEmail)) {
-      setemailError("");
-    } else setemailError("Please enter valid email address");
+      setEmailError("");
+    } else setEmailError("Please enter valid email address");
   };
 
   //function to check password fields,either matching or not
   const checkPassword = (e) => {
-    setcpassword(e);
-    if (password !== cpassword) {
-      setcpassError("Password does not match");
+    setConfirmPassword(e);
+    if (password !== confirmPassword) {
+      setConfirmPasswordError("Password does not match");
     } else {
-      setcpassError("");
+      setConfirmPasswordError("");
     }
   };
 
@@ -195,9 +191,9 @@ function Signup() {
                       <input
                         type="text"
                         style={
-                          firstName.length < 1 && fnameError !== ""
+                          firstName.length < 1 && firstNameError !== ""
                             ? { borderColor: "#dc3545" }
-                            : null || firstName.length > 0
+                            : firstName.length > 0
                             ? { borderColor: "#198754" }
                             : null
                         }
@@ -205,14 +201,14 @@ function Signup() {
                         placeholder="First Name"
                         required
                         onChange={(e) => {
-                          setfName(e.target.value);
-                          setfnameError("");
+                          setFirstName(e.target.value);
+                          setFirstNameError("");
                         }}
                       />
                       <div
-                        style={fnameError !== "" ? { color: "#dc3545" } : null}
+                        style={firstNameError !== "" ? { color: "#dc3545" } : null}
                       >
-                        {fnameError}
+                        {firstNameError}
                       </div>
                     </div>
                   </div>
@@ -221,9 +217,9 @@ function Signup() {
                       <input
                         type="text"
                         style={
-                          lastName.length < 1 && lnameError !== ""
+                          lastName.length < 1 && lastNameError !== ""
                             ? { borderColor: "#dc3545" }
-                            : null || lastName.length > 0
+                            : lastName.length > 0
                             ? { borderColor: "#198754" }
                             : null
                         }
@@ -232,14 +228,14 @@ function Signup() {
                         placeholder="Last Name"
                         required
                         onChange={(e) => {
-                          setlName(e.target.value);
-                          setlnameError("");
+                          setLastName(e.target.value);
+                          setLastNameError("");
                         }}
                       />
                       <div
-                        style={lnameError !== "" ? { color: "#dc3545" } : null}
+                        style={lastNameError !== "" ? { color: "#dc3545" } : null}
                       >
-                        {lnameError}
+                        {lastNameError}
                       </div>
                     </div>
                   </div>
@@ -250,8 +246,7 @@ function Signup() {
                         style={
                           emailError !== ""
                             ? { borderColor: "#dc3545" }
-                            : null ||
-                              (email.match(regEmail) && email.length > 0)
+                            : (email.match(regEmail) && email.length > 0)
                             ? { borderColor: "#198754" }
                             : null
                         }
@@ -274,10 +269,9 @@ function Signup() {
                           type={!toggleEye ? "password" : "text"}
                           className="form-control"
                           style={
-                            password.length < 7 && pswdError !== ""
+                            password.length < 7 && passwordError !== ""
                               ? { borderColor: "#dc3545" }
-                              : null ||
-                                (password.length > 7 && pswdError === "")
+                              : (password.length > 7 && passwordError === "")
                               ? { borderColor: "#198754" }
                               : null
                           }
@@ -287,10 +281,10 @@ function Signup() {
                           required
                           onChange={(e) => {
                             if (e.target.value.length > 7) {
-                              setpassword(e.target.value);
-                              setpswdError("");
+                              setPassword(e.target.value);
+                              setPasswordError("");
                             } else {
-                              setpswdError(
+                              setPasswordError(
                                 "Password must be greater than 8 characters"
                               );
                             }
@@ -301,7 +295,7 @@ function Signup() {
                           <button
                             class="pass-link"
                             type="button"
-                            onClick={() => setToggleeye(!toggleEye)}
+                            onClick={() => setToggleEye(!toggleEye)}
                           >
                             <i
                               id="pass-show"
@@ -314,9 +308,9 @@ function Signup() {
                         </span>
                       </div>
                       <div
-                        style={pswdError !== "" ? { color: "#dc3545" } : null}
+                        style={passwordError !== "" ? { color: "#dc3545" } : null}
                       >
-                        {pswdError}
+                        {passwordError}
                       </div>
                     </div>
                   </div>
@@ -327,10 +321,9 @@ function Signup() {
                           type={!toggleEye1 ? "password" : "text"}
                           className="form-control"
                           style={
-                            cpassword.length < 7 && cpassError !== ""
+                            confirmPassword.length < 7 && confirmPasswordError !== ""
                               ? { borderColor: "#dc3545" }
-                              : null ||
-                                (cpassword.length > 7 && cpassError === "")
+                              : (confirmPassword.length > 7 && confirmPasswordError === "")
                               ? { borderColor: "#198754" }
                               : null
                           }
@@ -344,9 +337,9 @@ function Signup() {
                               password === e.target.value
                             ) {
                               checkPassword(e.target.value);
-                              setcpassError("");
+                              setConfirmPasswordError("");
                             } else {
-                              setcpassError("Password does not match");
+                              setConfirmPasswordError("Password does not match");
                             }
                           }}
                         />
@@ -355,7 +348,7 @@ function Signup() {
                           <button
                             class="pass-link"
                             type="button"
-                            onClick={() => setToggleeye1(!toggleEye1)}
+                            onClick={() => setToggleEye1(!toggleEye1)}
                           >
                             <i
                               id="pass-show"
@@ -368,9 +361,9 @@ function Signup() {
                         </span>
                       </div>
                       <div
-                        style={cpassError !== "" ? { color: "#dc3545" } : null}
+                        style={confirmPasswordError !== "" ? { color: "#dc3545" } : null}
                       >
-                        {cpassError}
+                        {confirmPasswordError}
                       </div>
                     </div>
                   </div>
@@ -385,24 +378,24 @@ function Signup() {
                   {/* Displaying toast for error */}
                   <div>
                     {toastVisible &&
-                    toastError ===
+                    toastMessage ===
                       "Account created successfully! Redirecting ..." ? (
                       <div>
-                        <CommonToast
+                        <Toast
                           open={toastVisible}
                           backgroundColor="#0761d1"
                           type="info"
-                          message={toastError}
+                          message={toastMessage}
                         />
                       </div>
                     ) : toastVisible &&
-                      toastError === "Email address already registered." ? (
+                      toastMessage === "Email address already registered." ? (
                       <div>
-                        <CommonToast
+                        <Toast
                           open={toastVisible}
                           backgroundColor="#e00"
                           type="error"
-                          message={toastError}
+                          message={toastMessage}
                         />
                       </div>
                     ) : null}
@@ -427,7 +420,7 @@ function Signup() {
           </section>
 
           {/* Footer component for signup screen */}
-          <Footermobile />
+          <FooterMobile />
         </div>
       )}
     </div>

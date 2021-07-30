@@ -39,17 +39,17 @@ function header() {
                   <a href="/academics">Second Year</a>
                 </li>
                 <li>
-                  <a href="csdot.ml">Upload Resources</a>
+                  <a href="/">Upload Resources</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a className="nav-link" href="csdot.ml">
+              <a className="nav-link" href="/">
                 Placements
               </a>
             </li>
             <li>
-              <a className="nav-link" href="csdot.ml">
+              <a className="nav-link" href="/">
                 Certification
               </a>
             </li>

@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/header";
 import axios from "axios";
 import Preloader from "../components/preloader";
-import FooterCred from "../components/foot-cred";
+import FooterCredit from "../components/footerCredit";
 import { Offline, Online } from "react-detect-offline";
 
 //Academics component starts
 
 function Academics() {
-  const [isLoading, setisLoading] = useState(true);
-  const [yearName, setyearName] = useState("");
-  const [year, setyear] = useState(sessionStorage.getItem("year"));
-  const [oddSem, setoddSem] = useState(0);
-  const [evenSem, setevenSem] = useState(0);
-  const [yearData, setyearData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [yearName, setYearName] = useState("");
+  const [year, setYear] = useState(sessionStorage.getItem("year"));
+  const [oddSem, setOddSem] = useState(0);
+  const [evenSem, setEvenSem] = useState(0);
+  const [yearData, setYearData] = useState([]);
   const gitLabLink = "https://github.com/codespacedot/";
 
   //calling api based on selected year
@@ -24,31 +24,27 @@ function Academics() {
         .get(`https://csdot.herokuapp.com/api/academics/year/${year}`)
         .then((res) => {
           if (year === "4") {
-            setyearName("Final Year");
-            setoddSem("VII");
-            setevenSem("VIII");
+            setYearName("Final Year");
+            setOddSem("VII");
+            setEvenSem("VIII");
           } else if (year === "3") {
-            setyearName("Third Year");
-            setoddSem("V");
-            setevenSem("VI");
+            setYearName("Third Year");
+            setOddSem("V");
+            setEvenSem("VI");
           } else if (year === "2") {
-            setyearName("Second Year");
-            setoddSem("III");
-            setevenSem("IV");
+            setYearName("Second Year");
+            setOddSem("III");
+            setEvenSem("IV");
           }
-          console.log("responce is", res);
           if (res.status === 200) {
             const result = res.data;
-            setyearData(result);
-            setisLoading(false);
+            setYearData(result);
+            setIsLoading(false);
           }
         })
-        .catch((error) => {
-          console.log("errorrr", error);
-        });
     } else {
-      setyear(0);
-      setisLoading(false);
+      setYear(0);
+      setIsLoading(false);
     }
   }, [year]);
 
@@ -78,7 +74,7 @@ function Academics() {
                   style={{ marginLeft: "0px", marginRight: "0px" }}
                 >
                   <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 ">
-                    <h2 class="sp">Semister {oddSem}</h2>
+                    <h2 class="sp">Semester {oddSem}</h2>
                   </div>
                 </div>
 
@@ -149,7 +145,7 @@ function Academics() {
                   style={{ marginLeft: "0px", marginRight: "0px" }}
                 >
                   <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 ">
-                    <h2 class="sp">Semister {evenSem}</h2>
+                    <h2 class="sp">Semester {evenSem}</h2>
                   </div>
                 </div>
 
@@ -219,7 +215,7 @@ function Academics() {
           </section>
         )}
         {/* calling footer component for academics screen */}
-        <FooterCred />
+        <FooterCredit />
       </Online>
       <Offline>
         <center>

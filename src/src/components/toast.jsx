@@ -6,9 +6,8 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-function CommonToast(props) {
+function Toast(props) {
   const [open, setOpen] = useState(props.open);
-  console.log("received type is", props.type);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -42,4 +41,4 @@ function CommonToast(props) {
   );
 }
 
-export default CommonToast;
+export default Toast;

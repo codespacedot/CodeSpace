@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Footer_credit extends Component {
+class FooterCredit extends Component {
   render() {
     return (
       <footer id="footer">
@@ -173,4 +173,4 @@ class Footer_credit extends Component {
     );
   }
 }
-export default Footer_credit;
+export default FooterCredit;

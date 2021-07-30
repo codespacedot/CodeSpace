@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Header from "../components/header";
-import Footermobile from "../components/footer-mobile";
+import FooterMobile from "../components/footerMobile";
 import axios from "axios";
 import { sha256 } from "js-sha256";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import CommonToast from "../components/commontoast";
+import Toast from "../components/toast";
 
 //To set width of loading bar
 const useStyles = makeStyles((theme) => ({
@@ -17,56 +17,54 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-function Resetpassword() {
-  const [toggleEye, setToggleeye] = useState(false);
-  const [toggleEye1, setToggleeye1] = useState(false);
-  const [isLoading, setisLoading] = useState(false);
-  const [pswdError, setpswdError] = useState("");
-  const [cpassError, setcpassError] = useState("");
-  const [password, setpassword] = useState("");
-  const [cpassword, setcpassword] = useState("");
-  const [verificationError, setverificationError] = useState("");
-  const [code, setcode] = useState("");
-  const [toastVisible, settoastVisible] = useState(false);
-  const [toastError, setToastError] = useState("");
+function ResetPassword() {
+  const [toggleEye, setToggleEye] = useState(false);
+  const [toggleEye1, setToggleEye1] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [verificationError, setVerificationError] = useState("");
+  const [code, setCode] = useState("");
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
   const classes = useStyles();
 
   //Taking environment variables
   const { REACT_APP_SHA_KEY, REACT_APP_CS_API } = process.env;
   //function to check password fields,either matching or not
   const checkPassword = (e) => {
-    setcpassword(e);
-    if (password !== cpassword) {
-      setcpassError("Password does not match");
+    setConfirmPassword(e);
+    if (password !== confirmPassword) {
+      setConfirmPasswordError("Password does not match");
     } else {
-      setcpassError("");
+      setConfirmPasswordError("");
     }
   };
 
   //function to reset password
   const resetPassword = () => {
-    console.log("data", password, cpassword, code);
     if (
       (password === undefined || password === "") &&
-      (cpassword === undefined || cpassword === "") &&
+      (confirmPassword === undefined || confirmPassword === "") &&
       (code === undefined || code === "")
     ) {
-      setpswdError("This field is required");
-      setcpassError("This field is required");
-      setverificationError("This field is required");
+      setPasswordError("This field is required");
+      setConfirmPasswordError("This field is required");
+      setVerificationError("This field is required");
     } else if (password === "" && password === undefined) {
-      setpswdError("This field is required");
-    } else if (cpassword === "" && cpassword === undefined) {
-      setcpassError("This field is required");
+      setPasswordError("This field is required");
+    } else if (confirmPassword === "" && confirmPassword === undefined) {
+      setConfirmPasswordError("This field is required");
     } else if (code === "" || code === undefined) {
-      setverificationError("This field is required");
+      setVerificationError("This field is required");
     } else {
-      setisLoading(true);
+      setIsLoading(true);
       const hash = sha256.create();
       hash.update(REACT_APP_SHA_KEY);
-      hash.update(cpassword);
+      hash.update(confirmPassword);
       const encryptedPassword = hash.hex();
-      console.log(password, cpassword, code);
       axios
         .request({
           url: `${REACT_APP_CS_API}/api/users/password/reset`,
@@ -80,24 +78,23 @@ function Resetpassword() {
           },
         })
         .then((res) => {
-          console.log(res.data, res.status);
           if (res.status === 200) {
-            setisLoading(false);
-            settoastVisible(true);
-            setToastError("Password updated.");
+            setIsLoading(false);
+            setToastVisible(true);
+            setToastMessage("New password set successfully.");
             setTimeout(() => {
-              settoastVisible(false);
+              setToastVisible(false);
               window.location = "/login";
-            }, 3000);
+            }, 2500);
           }
         })
-        .catch((error) => {
-          setisLoading(false);
-          settoastVisible(true);
-          setToastError("Invalid verification code.");
+        .catch((_) => {
+          setIsLoading(false);
+          setToastVisible(true);
+          setToastMessage("Invalid verification code.");
           setTimeout(() => {
-            settoastVisible(false);
-          }, 3000);
+            setToastVisible(false);
+          }, 2500);
         });
     }
   };
@@ -150,10 +147,9 @@ function Resetpassword() {
                           type={!toggleEye ? "password" : "text"}
                           className="form-control"
                           style={
-                            password.length < 7 && pswdError !== ""
+                            password.length < 7 && passwordError !== ""
                               ? { borderColor: "#dc3545" }
-                              : null ||
-                                (password.length > 7 && pswdError === "")
+                              : (password.length > 7 && passwordError === "")
                               ? { borderColor: "#198754" }
                               : null
                           }
@@ -163,10 +159,10 @@ function Resetpassword() {
                           required
                           onChange={(e) => {
                             if (e.target.value.length > 7) {
-                              setpassword(e.target.value);
-                              setpswdError("");
+                              setPassword(e.target.value);
+                              setPasswordError("");
                             } else {
-                              setpswdError(
+                              setPasswordError(
                                 "Password must be greater than 8 characters"
                               );
                             }
@@ -177,7 +173,7 @@ function Resetpassword() {
                           <button
                             class="pass-link"
                             type="button"
-                            onClick={() => setToggleeye(!toggleEye)}
+                            onClick={() => setToggleEye(!toggleEye)}
                           >
                             <i
                               id="pass-show"
@@ -190,9 +186,9 @@ function Resetpassword() {
                         </span>
                       </div>
                       <div
-                        style={pswdError !== "" ? { color: "#dc3545" } : null}
+                        style={passwordError !== "" ? { color: "#dc3545" } : null}
                       >
-                        {pswdError}
+                        {passwordError}
                       </div>
                     </div>
                   </div>
@@ -203,10 +199,9 @@ function Resetpassword() {
                           type={!toggleEye1 ? "password" : "text"}
                           className="form-control"
                           style={
-                            cpassword.length < 7 && cpassError !== ""
+                            confirmPassword.length < 7 && confirmPasswordError !== ""
                               ? { borderColor: "#dc3545" }
-                              : null ||
-                                (cpassword.length > 7 && cpassError === "")
+                              : (confirmPassword.length > 7 && confirmPasswordError === "")
                               ? { borderColor: "#198754" }
                               : null
                           }
@@ -220,9 +215,9 @@ function Resetpassword() {
                               password === e.target.value
                             ) {
                               checkPassword(e.target.value);
-                              setcpassError("");
+                              setConfirmPasswordError("");
                             } else {
-                              setcpassError("Password does not match");
+                              setConfirmPasswordError("Password does not match");
                             }
                           }}
                         />
@@ -231,7 +226,7 @@ function Resetpassword() {
                           <button
                             class="pass-link"
                             type="button"
-                            onClick={() => setToggleeye1(!toggleEye1)}
+                            onClick={() => setToggleEye1(!toggleEye1)}
                           >
                             <i
                               id="pass-show"
@@ -244,9 +239,9 @@ function Resetpassword() {
                         </span>
                       </div>
                       <div
-                        style={cpassError !== "" ? { color: "#dc3545" } : null}
+                        style={confirmPasswordError !== "" ? { color: "#dc3545" } : null}
                       >
-                        {cpassError}
+                        {confirmPasswordError}
                       </div>
                     </div>
                   </div>
@@ -258,8 +253,7 @@ function Resetpassword() {
                         style={
                           verificationError !== "" && code.length < 6
                             ? { borderColor: "#dc3545" }
-                            : null ||
-                              (verificationError === "" && code.length === 6)
+                            : (verificationError === "" && code.length === 6)
                             ? { borderColor: "#198754" }
                             : null
                         }
@@ -270,8 +264,8 @@ function Resetpassword() {
                         maxLength={6}
                         onChange={(e) => {
                           if (e.target.value.length === 6) {
-                            setverificationError("");
-                            setcode(e.target.value);
+                            setVerificationError("");
+                            setCode(e.target.value);
                           } else {
                           }
                         }}
@@ -291,32 +285,32 @@ function Resetpassword() {
                   </div>
                   {/* Displaying toast for error */}
                   <div>
-                    {toastVisible && toastError === "Password updated." ? (
+                    {toastVisible && toastMessage === "Password updated." ? (
                       <div>
-                        <CommonToast
+                        <Toast
                           open={toastVisible}
                           backgroundColor="#0761d1"
                           type="info"
-                          message={toastError}
+                          message={toastMessage}
                         />
                       </div>
                     ) : null}
                     {toastVisible &&
-                    toastError === "Invalid verification code." ? (
+                    toastMessage === "Invalid verification code." ? (
                       <div>
-                        <CommonToast
+                        <Toast
                           open={toastVisible}
                           backgroundColor="#e00"
                           type="error"
-                          message={toastError}
+                          message={toastMessage}
                         />
                       </div>
                     ) : null}
                   </div>
                   <div className="col-12 col-xl-8 col-lg-8 col-md-12 col-sm-12 bottom form-link  align-items-center justify-content-center">
                     <p>
-                      Verification code is sent to email address. <br />
-                      Please check spam folder too.
+                      Check your email for verification code. <br />
+                      If doesn't appear within few minutes, check spam folder.
                     </p>
                   </div>
                 </form>
@@ -324,11 +318,11 @@ function Resetpassword() {
             </div>
           </section>
           {/* End Section */}
-          <Footermobile />
+          <FooterMobile />
         </div>
       )}
     </div>
   );
 }
 
-export default Resetpassword;
+export default ResetPassword;
