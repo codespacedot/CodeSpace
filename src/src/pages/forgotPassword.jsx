@@ -22,7 +22,7 @@ function ForgotPassword() {
   const [isLoading, setIsLoading] = useState(false);
   const [usernameError, setUsernameError] = useState("");
   const [toastVisible, setToastVisible] = useState(false);
-  const [toastError, setToastError] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
   const regEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
   const classes = useStyles();
 
@@ -55,25 +55,24 @@ function ForgotPassword() {
           data: { email: username },
         })
         .then((res) => {
+          setIsLoading(false);
           if (res.status === 200) {
-            setIsLoading(false);
             window.location = "/reset-password";
           } else {
-            setIsLoading(false);
             setToastVisible(true);
-            setToastError("User does not exists.");
+            setToastMessage("Account does not exists.");
             setTimeout(() => {
               setToastVisible(false);
-            }, 3000);
+            }, 2500);
           }
         })
-        .catch((error) => {
+        .catch((_) => {
           setIsLoading(false);
           setToastVisible(true);
-          setToastError("User does not exists.");
+          setToastMessage("Account does not exists.");
           setTimeout(() => {
             setToastVisible(false);
-          }, 3000);
+          }, 2500);
         });
     }
   };
@@ -150,7 +149,7 @@ function ForgotPassword() {
                     <input
                       className="submit-btn btn"
                       type="button"
-                      value="Get Verification Code"
+                      value="Send Verification Code"
                       onClick={sendEmail}
                     />
                   </div>
@@ -162,7 +161,7 @@ function ForgotPassword() {
                           open={toastVisible}
                           backgroundColor="#e00"
                           type="error"
-                          message={toastError}
+                          message={toastMessage}
                         />
                       </div>
                     ) : null}

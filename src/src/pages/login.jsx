@@ -29,7 +29,7 @@ function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const regEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
   const [toastVisible, setToastVisible] = useState(false);
-  const [toastError, setToastError] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
 
   const classes = useStyles();
 
@@ -104,20 +104,19 @@ function Login() {
           }
         })
         .catch((error) => {
+          setIsLoading(false);
           if (error.response.data.detail.ERROR === "Invalid credentials.") {
-            setIsLoading(false);
             setToastVisible(true);
-            setToastError("Invalid credentials.");
+            setToastMessage("Invalid credentials.");
             setTimeout(() => {
               setToastVisible(false);
-            }, 3000);
+            }, 2500);
           } else {
-            setIsLoading(false);
             setToastVisible(true);
-            setToastError("Error ! Please try again.");
+            setToastMessage("Error, please try again.");
             setTimeout(() => {
               setToastVisible(false);
-            }, 3000);
+            }, 2500);
           }
         });
     }
@@ -253,25 +252,25 @@ function Login() {
                   {/* Displaying toast for error */}
                   <div>
                     {toastVisible &&
-                    toastError === "Error ! Please try again." ? (
+                    toastMessage === "Error ! Please try again." ? (
                       <div>
                         <Toast
                           open={toastVisible}
                           backgroundColor="#e00"
-                          message={toastError}
+                          message={toastMessage}
                           type="error"
                         />
                       </div>
                     ) : null}
                   </div>
                   <div>
-                    {toastVisible && toastError === "Invalid credentials." ? (
+                    {toastVisible && toastMessage === "Invalid credentials." ? (
                       <div>
                         <Toast
                           open={toastVisible}
                           backgroundColor="#e00"
                           type="error"
-                          message={toastError}
+                          message={toastMessage}
                         />
                       </div>
                     ) : null}

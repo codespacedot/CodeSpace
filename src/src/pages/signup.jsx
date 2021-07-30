@@ -35,12 +35,12 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [toastVisible, setToastVisible] = useState(false);
-  const [toastError, setToastError] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
   const regEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 
   const classes = useStyles();
 
-  //To validate form and create user
+  //Validate form and create user
   const signUpUser = () => {
     if (
       firstName === "" &&
@@ -85,7 +85,7 @@ function Signup() {
       hash.update(confirmPassword);
       const encryptedPassword = hash.hex();
 
-      //To make api call for student registration
+      //Make api call for student registration
       axios
         .request({
           method: "POST",
@@ -104,28 +104,24 @@ function Signup() {
           if (res.status === 201) {
             setIsLoading(false);
             setToastVisible(true);
-            setToastError("Account created successfully! Redirecting ...");
+            setToastMessage("Account created successfully.");
             setTimeout(() => {
               setToastVisible(false);
               window.location = "/login";
-            }, 3000);
+            }, 2500);
           }
         })
         .catch((error) => {
+          setIsLoading(false);
+          setToastVisible(true);
           if (error.response.data.detail.ERROR === "User already exists.") {
-            setIsLoading(false);
-            setToastVisible(true);
-            setToastError("Email address already registered.");
-            setTimeout(() => {
-              setToastVisible(false);
-            }, 3000);
+            setToastMessage("Account already exists.");
           } else {
-            setIsLoading(false);
-            setToastError("Error! Please try again.");
-            setTimeout(() => {
-              setToastVisible(false);
-            }, 3000);
+            setToastMessage("Error! please try again.");
           }
+          setTimeout(() => {
+            setToastVisible(false);
+          }, 2500);
         });
     }
   };
@@ -382,24 +378,24 @@ function Signup() {
                   {/* Displaying toast for error */}
                   <div>
                     {toastVisible &&
-                    toastError ===
+                    toastMessage ===
                       "Account created successfully! Redirecting ..." ? (
                       <div>
                         <Toast
                           open={toastVisible}
                           backgroundColor="#0761d1"
                           type="info"
-                          message={toastError}
+                          message={toastMessage}
                         />
                       </div>
                     ) : toastVisible &&
-                      toastError === "Email address already registered." ? (
+                      toastMessage === "Email address already registered." ? (
                       <div>
                         <Toast
                           open={toastVisible}
                           backgroundColor="#e00"
                           type="error"
-                          message={toastError}
+                          message={toastMessage}
                         />
                       </div>
                     ) : null}

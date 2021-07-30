@@ -28,7 +28,7 @@ function ResetPassword() {
   const [verificationError, setVerificationError] = useState("");
   const [code, setCode] = useState("");
   const [toastVisible, setToastVisible] = useState(false);
-  const [toastError, setToastError] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
   const classes = useStyles();
 
   //Taking environment variables
@@ -81,20 +81,20 @@ function ResetPassword() {
           if (res.status === 200) {
             setIsLoading(false);
             setToastVisible(true);
-            setToastError("Password updated.");
+            setToastMessage("New password set successfully.");
             setTimeout(() => {
               setToastVisible(false);
               window.location = "/login";
-            }, 3000);
+            }, 2500);
           }
         })
-        .catch((error) => {
+        .catch((_) => {
           setIsLoading(false);
           setToastVisible(true);
-          setToastError("Invalid verification code.");
+          setToastMessage("Invalid verification code.");
           setTimeout(() => {
             setToastVisible(false);
-          }, 3000);
+          }, 2500);
         });
     }
   };
@@ -285,32 +285,32 @@ function ResetPassword() {
                   </div>
                   {/* Displaying toast for error */}
                   <div>
-                    {toastVisible && toastError === "Password updated." ? (
+                    {toastVisible && toastMessage === "Password updated." ? (
                       <div>
                         <Toast
                           open={toastVisible}
                           backgroundColor="#0761d1"
                           type="info"
-                          message={toastError}
+                          message={toastMessage}
                         />
                       </div>
                     ) : null}
                     {toastVisible &&
-                    toastError === "Invalid verification code." ? (
+                    toastMessage === "Invalid verification code." ? (
                       <div>
                         <Toast
                           open={toastVisible}
                           backgroundColor="#e00"
                           type="error"
-                          message={toastError}
+                          message={toastMessage}
                         />
                       </div>
                     ) : null}
                   </div>
                   <div className="col-12 col-xl-8 col-lg-8 col-md-12 col-sm-12 bottom form-link  align-items-center justify-content-center">
                     <p>
-                      Verification code is sent to email address. <br />
-                      Please check spam folder too.
+                      Check your email for verification code. <br />
+                      If doesn't appear within few minutes, check spam folder.
                     </p>
                   </div>
                 </form>
