@@ -277,9 +277,7 @@ function Login() {
                   </div>
                   <div className="col-12 col-xl-8 col-lg-8 col-md-12 col-sm-12 bottom form-link  align-items-center justify-content-center">
                     <p>
-                      <a href="/signup">
-                        Dont have an account? <span>Sign Up</span>
-                      </a>
+                      Dont have an account? <a href="/signup"><span>Sign Up</span></a>
                       <br />
                       <a href="/forgot-password">
                         <span>Forgot Your Password?</span>

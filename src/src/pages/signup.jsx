@@ -402,16 +402,12 @@ function Signup() {
                   </div>
                   <div className="col-12 col-lg-10 col-md-12 bottom form-link  align-items-center justify-content-center">
                     <p>
-                      <a href="/login">
-                        Already have an account? <span>Log In</span>
-                      </a>
-                      <br />
-                      <a href="terms.html">
-                        {" "}
-                        By Signing Up you agree with our <span>
-                          Terms{" "}
-                        </span> and <span>Data Privacy</span>.
-                      </a>
+                      Already have an account? <a href="/login"><span>Log In</span></a>
+                      <br/>
+                      <br/>
+                      By clicking Sign Up, you agree with our
+                      <br/>
+                      <a href="terms.html"><span>Terms of Service</span></a> and <a href="policy.html"><span>Privacy Policy</span></a>.
                     </p>
                   </div>
                 </form>
