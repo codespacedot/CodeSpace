@@ -252,13 +252,13 @@ function Login() {
                   {/* Displaying toast for error */}
                   <div>
                     {toastVisible &&
-                    toastMessage === "Error ! Please try again." ? (
+                    toastMessage === "Error! please try again." ? (
                       <div>
                         <Toast
                           open={toastVisible}
                           backgroundColor="#e00"
-                          message={toastMessage}
                           type="error"
+                          message={toastMessage}
                         />
                       </div>
                     ) : null}

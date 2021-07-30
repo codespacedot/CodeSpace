@@ -285,12 +285,12 @@ function ResetPassword() {
                   </div>
                   {/* Displaying toast for error */}
                   <div>
-                    {toastVisible && toastMessage === "Password updated." ? (
+                    {toastVisible && toastMessage === "New password set successfully." ? (
                       <div>
                         <Toast
                           open={toastVisible}
                           backgroundColor="#0761d1"
-                          type="info"
+                          type="success"
                           message={toastMessage}
                         />
                       </div>
