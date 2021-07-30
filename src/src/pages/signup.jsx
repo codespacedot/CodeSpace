@@ -375,21 +375,21 @@ function Signup() {
                       onClick={signUpUser}
                     />
                   </div>
-                  {/* Displaying toast for error */}
+                  {/* Displaying toast */}
                   <div>
                     {toastVisible &&
                     toastMessage ===
-                      "Account created successfully! Redirecting ..." ? (
+                      "Account created successfully." ? (
                       <div>
                         <Toast
                           open={toastVisible}
                           backgroundColor="#0761d1"
-                          type="info"
+                          type="success"
                           message={toastMessage}
                         />
                       </div>
                     ) : toastVisible &&
-                      toastMessage === "Email address already registered." ? (
+                        (toastMessage === "Account already exists." || toastMessage === "Error! please try again.") ? (
                       <div>
                         <Toast
                           open={toastVisible}
