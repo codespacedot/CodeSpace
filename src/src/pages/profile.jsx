@@ -33,39 +33,48 @@ function Profile() {
       .then((res) => {
         if (res.status === 200) {
           setisLoading(false);
+          sessionStorage.removeItem("CS_TOKEN");
+          sessionStorage.removeItem("USER_PROFILE");
           window.location = "/login";
         }
-      });
+      })
+      .catch((error) => {});
   };
   return (
     <div>
-      <div className={classes.root}>
-        <LinearProgress
-          color="primary"
-          className={isLoading ? "d-block" : "d-none"}
-        />
-      </div>
-      <Header />
-      <section className="form" id="form">
-        <div className="row">
-          <h2>Welcome user</h2>
-          <div className="col">
-            <h3>Full Name: {parseUserData.name}</h3>
-          </div>
-          <div className="col">
-            <h3>Username: {parseUserData.email}</h3>
-          </div>
-          <div className="col">
-            <input
-              className="btn btn-danger"
-              type="button"
-              value="Delete Account"
-              onClick={deleteAccount}
+      {sessionStorage.getItem("CS_TOKEN") !== null ? (
+        <div>
+          <div className={classes.root}>
+            <LinearProgress
+              color="primary"
+              className={isLoading ? "d-block" : "d-none"}
             />
           </div>
+          <Header />
+          <section className="form" id="form">
+            <div className="row">
+              <h2>Welcome user</h2>
+              <div className="col">
+                <h3>Full Name: {parseUserData.name}</h3>
+              </div>
+              <div className="col">
+                <h3>Username: {parseUserData.email}</h3>
+              </div>
+              <div className="col">
+                <input
+                  className="btn btn-danger"
+                  type="button"
+                  value="Delete Account"
+                  onClick={deleteAccount}
+                />
+              </div>
+            </div>
+          </section>
+          <Footer />
         </div>
-      </section>
-      <Footer />
+      ) : (
+        window.history.back()
+      )}
     </div>
   );
 }

@@ -57,6 +57,8 @@ function Academics() {
     <div>
       <Online>
         <Header />
+
+        {/* Calling pre-loader component */}
         {isLoading ? (
           <div>
             <Preloader />
@@ -80,6 +82,7 @@ function Academics() {
                   </div>
                 </div>
 
+                {/* Mapping of academics data */}
                 {yearData.ODD_SEMESTER.SUBJECTS.map((odd) => {
                   return (
                     <div
@@ -215,7 +218,7 @@ function Academics() {
             </div>
           </section>
         )}
-        {/* calling footer component from src-components-footer.js */}
+        {/* calling footer component for academics screen */}
         <FooterCred />
       </Online>
       <Offline>
