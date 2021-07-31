@@ -19,7 +19,7 @@ function Placements() {
               style={{ marginLeft: "0px", marginRight: "0px" }}
             >
               <h2 style={{ fontSize: "70px", marginTop: "20%" }}>
-                Work in Progress.
+                Coming soon...
               </h2>
             </div>
           </div>
