@@ -6,6 +6,15 @@ import { sha256 } from "js-sha256";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Toast from "../components/toast";
+import {
+  invalidEmail,
+  requiredField,
+  regEmail,
+  formError,
+  formPasswordError,
+  passwordNotMatches,
+  successAccount,
+} from "../constants";
 
 //To set width of loading bar
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +45,6 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
-  const regEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 
   const classes = useStyles();
 
@@ -49,27 +57,27 @@ function Signup() {
       password === "" &&
       confirmPassword === ""
     ) {
-      setFirstNameError("This field is required");
-      setLastNameError("This field is required");
-      setEmailError("This field is required");
-      setPasswordError("This field is required");
-      setConfirmPasswordError("This field is required");
+      setFirstNameError(requiredField);
+      setLastNameError(requiredField);
+      setEmailError(requiredField);
+      setPasswordError(requiredField);
+      setConfirmPasswordError(requiredField);
     } else if (firstName === "") {
-      setFirstNameError("This field is required");
+      setFirstNameError(requiredField);
     } else if (lastName === "") {
-      setLastNameError("This field is required");
+      setLastNameError(requiredField);
     } else if (email === "") {
-      setEmailError("This field is required");
+      setEmailError(requiredField);
     } else if (email.length > 0 && !email.match(regEmail)) {
-      setEmailError("Please enter valid email address");
+      setEmailError(invalidEmail);
     } else if (password === "") {
-      setPasswordError("This field is required");
+      setPasswordError(requiredField);
     } else if (password.length < 8) {
-      setPasswordError("Password must be greater than 8 characters");
+      setPasswordError(formPasswordError);
     } else if (confirmPassword === "") {
-      setConfirmPasswordError("This field is required");
+      setConfirmPasswordError(requiredField);
     } else if (confirmPassword !== password) {
-      setConfirmPasswordError("Password does not match");
+      setConfirmPasswordError(passwordNotMatches);
     } else {
       setIsLoading(true);
       setFirstNameError("");
@@ -104,7 +112,7 @@ function Signup() {
           if (res.status === 201) {
             setIsLoading(false);
             setToastVisible(true);
-            setToastMessage("Account created successfully.");
+            setToastMessage(successAccount);
             setTimeout(() => {
               setToastVisible(false);
               window.location = "/login";
@@ -117,7 +125,7 @@ function Signup() {
           if (error.response.data.detail.ERROR === "User already exists.") {
             setToastMessage("Account already exists.");
           } else {
-            setToastMessage("Error! please try again.");
+            setToastMessage(formError);
           }
           setTimeout(() => {
             setToastVisible(false);
@@ -130,14 +138,14 @@ function Signup() {
     setEmail(e);
     if (e.match(regEmail)) {
       setEmailError("");
-    } else setEmailError("Please enter valid email address");
+    } else setEmailError(invalidEmail);
   };
 
   //function to check password fields,either matching or not
   const checkPassword = (e) => {
     setConfirmPassword(e);
     if (password !== confirmPassword) {
-      setConfirmPasswordError("Password does not match");
+      setConfirmPasswordError(passwordNotMatches);
     } else {
       setConfirmPasswordError("");
     }
@@ -206,7 +214,9 @@ function Signup() {
                         }}
                       />
                       <div
-                        style={firstNameError !== "" ? { color: "#dc3545" } : null}
+                        style={
+                          firstNameError !== "" ? { color: "#dc3545" } : null
+                        }
                       >
                         {firstNameError}
                       </div>
@@ -233,7 +243,9 @@ function Signup() {
                         }}
                       />
                       <div
-                        style={lastNameError !== "" ? { color: "#dc3545" } : null}
+                        style={
+                          lastNameError !== "" ? { color: "#dc3545" } : null
+                        }
                       >
                         {lastNameError}
                       </div>
@@ -246,7 +258,7 @@ function Signup() {
                         style={
                           emailError !== ""
                             ? { borderColor: "#dc3545" }
-                            : (email.match(regEmail) && email.length > 0)
+                            : email.match(regEmail) && email.length > 0
                             ? { borderColor: "#198754" }
                             : null
                         }
@@ -271,7 +283,7 @@ function Signup() {
                           style={
                             password.length < 7 && passwordError !== ""
                               ? { borderColor: "#dc3545" }
-                              : (password.length > 7 && passwordError === "")
+                              : password.length > 7 && passwordError === ""
                               ? { borderColor: "#198754" }
                               : null
                           }
@@ -284,9 +296,7 @@ function Signup() {
                               setPassword(e.target.value);
                               setPasswordError("");
                             } else {
-                              setPasswordError(
-                                "Password must be greater than 8 characters"
-                              );
+                              setPasswordError(formPasswordError);
                             }
                           }}
                         />
@@ -308,7 +318,9 @@ function Signup() {
                         </span>
                       </div>
                       <div
-                        style={passwordError !== "" ? { color: "#dc3545" } : null}
+                        style={
+                          passwordError !== "" ? { color: "#dc3545" } : null
+                        }
                       >
                         {passwordError}
                       </div>
@@ -321,9 +333,11 @@ function Signup() {
                           type={!toggleEye1 ? "password" : "text"}
                           className="form-control"
                           style={
-                            confirmPassword.length < 7 && confirmPasswordError !== ""
+                            confirmPassword.length < 7 &&
+                            confirmPasswordError !== ""
                               ? { borderColor: "#dc3545" }
-                              : (confirmPassword.length > 7 && confirmPasswordError === "")
+                              : confirmPassword.length > 7 &&
+                                confirmPasswordError === ""
                               ? { borderColor: "#198754" }
                               : null
                           }
@@ -339,7 +353,7 @@ function Signup() {
                               checkPassword(e.target.value);
                               setConfirmPasswordError("");
                             } else {
-                              setConfirmPasswordError("Password does not match");
+                              setConfirmPasswordError(passwordNotMatches);
                             }
                           }}
                         />
@@ -361,7 +375,11 @@ function Signup() {
                         </span>
                       </div>
                       <div
-                        style={confirmPasswordError !== "" ? { color: "#dc3545" } : null}
+                        style={
+                          confirmPasswordError !== ""
+                            ? { color: "#dc3545" }
+                            : null
+                        }
                       >
                         {confirmPasswordError}
                       </div>
@@ -377,9 +395,7 @@ function Signup() {
                   </div>
                   {/* Displaying toast */}
                   <div>
-                    {toastVisible &&
-                    toastMessage ===
-                      "Account created successfully." ? (
+                    {toastVisible && toastMessage === successAccount ? (
                       <div>
                         <Toast
                           open={toastVisible}
@@ -389,7 +405,8 @@ function Signup() {
                         />
                       </div>
                     ) : toastVisible &&
-                        (toastMessage === "Account already exists." || toastMessage === "Error! please try again.") ? (
+                      (toastMessage === "Account already exists." ||
+                        toastMessage === formError) ? (
                       <div>
                         <Toast
                           open={toastVisible}
@@ -402,12 +419,22 @@ function Signup() {
                   </div>
                   <div className="col-12 col-lg-10 col-md-12 bottom form-link  align-items-center justify-content-center">
                     <p>
-                      Already have an account? <a href="/login"><span>Log In</span></a>
-                      <br/>
-                      <br/>
+                      Already have an account?{" "}
+                      <a href="/login">
+                        <span>Log In</span>
+                      </a>
+                      <br />
+                      <br />
                       By clicking Sign Up, you agree with our
-                      <br/>
-                      <a href="terms.html"><span>Terms of Service</span></a> and <a href="policy.html"><span>Privacy Policy</span></a>.
+                      <br />
+                      <a href="terms.html">
+                        <span>Terms of Service</span>
+                      </a>{" "}
+                      and{" "}
+                      <a href="policy.html">
+                        <span>Privacy Policy</span>
+                      </a>
+                      .
                     </p>
                   </div>
                 </form>

@@ -5,6 +5,7 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Toast from "../components/toast";
+import { invalidEmail, requiredField, regEmail, noAccount } from "../constants";
 
 //To set width of loading bar
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +24,6 @@ function ForgotPassword() {
   const [usernameError, setUsernameError] = useState("");
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
-  const regEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
   const classes = useStyles();
 
   //Taking environment variables
@@ -34,15 +34,15 @@ function ForgotPassword() {
     setUsername(e);
     if (e.match(regEmail)) {
       setUsernameError("");
-    } else setUsernameError("Please enter valid email address.");
+    } else setUsernameError(invalidEmail);
   };
 
   //send verification code to registered mail
   const sendEmail = () => {
     if (username === "") {
-      setUsernameError("This Field is required");
+      setUsernameError(requiredField);
     } else if (username.length > 0 && !username.match(regEmail)) {
-      setUsernameError("Please enter valid email address.");
+      setUsernameError(invalidEmail);
     } else {
       setIsLoading(true);
       axios
@@ -60,7 +60,7 @@ function ForgotPassword() {
             window.location = "/reset-password";
           } else {
             setToastVisible(true);
-            setToastMessage("Account does not exists.");
+            setToastMessage(noAccount);
             setTimeout(() => {
               setToastVisible(false);
             }, 2500);
@@ -69,7 +69,7 @@ function ForgotPassword() {
         .catch((_) => {
           setIsLoading(false);
           setToastVisible(true);
-          setToastMessage("Account does not exists.");
+          setToastMessage(noAccount);
           setTimeout(() => {
             setToastVisible(false);
           }, 2500);
@@ -126,7 +126,7 @@ function ForgotPassword() {
                         style={
                           usernameError !== ""
                             ? { borderColor: "#dc3545" }
-                            : (username.match(regEmail) && username.length > 0)
+                            : username.match(regEmail) && username.length > 0
                             ? { borderColor: "#198754" }
                             : null
                         }
