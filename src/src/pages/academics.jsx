@@ -4,7 +4,7 @@ import axios from "axios";
 import Preloader from "../components/preloader";
 import FooterCredit from "../components/footerCredit";
 import { Offline, Online } from "react-detect-offline";
-
+import { gitLabLink } from "../constants";
 //Academics component starts
 
 function Academics() {
@@ -14,14 +14,15 @@ function Academics() {
   const [oddSem, setOddSem] = useState(0);
   const [evenSem, setEvenSem] = useState(0);
   const [yearData, setYearData] = useState([]);
-  const gitLabLink = "https://github.com/codespacedot/";
+  //Taking environment variables
+  const { REACT_APP_CS_API } = process.env;
 
   //calling api based on selected year
   useEffect(() => {
     if (year !== null) {
       //function to call api
       axios
-        .get(`https://csdot.herokuapp.com/api/academics/year/${year}`)
+        .get(`${REACT_APP_CS_API}/api/academics/year/${year}`)
         .then((res) => {
           if (year === "4") {
             setYearName("Final Year");
@@ -46,7 +47,7 @@ function Academics() {
       setYear(0);
       setIsLoading(false);
     }
-  }, [year]);
+  }, [REACT_APP_CS_API, year]);
 
   //render of academics
   return (
@@ -83,20 +84,45 @@ function Academics() {
                   return (
                     <div
                       key={odd.key}
+                      onClick={() => {
+                        sessionStorage.setItem("SELECTED_SUBJECT", odd.key);
+                        window.location = "/resources";
+                      }}
                       class="col-lg-4 col-md-4 d-flex align-items-stretch  cardspace"
                     >
                       <div class="icon-box">
                         <div class="icon">
                           {" "}
                           <h4>
-                            <a href="/">{odd.abbreviation}</a>
+                            <a
+                              href="/resources"
+                              onClick={() => {
+                                sessionStorage.setItem(
+                                  "SELECTED_SUBJECT",
+                                  odd.key
+                                );
+                              }}
+                            >
+                              {odd.abbreviation}
+                            </a>
                           </h4>{" "}
                         </div>
 
                         <div class="none">
                           {" "}
                           <p>
-                            <a href="/">{odd.name}</a>
+                            <a
+                              href="/resources"
+                              onClick={() => {
+                                sessionStorage.setItem(
+                                  "SELECTED_SUBJECT",
+                                  odd.key
+                                );
+                                window.location = "/resources";
+                              }}
+                            >
+                              {odd.name}
+                            </a>
                           </p>
                         </div>
                       </div>
@@ -153,20 +179,44 @@ function Academics() {
                   return (
                     <div
                       key={even.key}
+                      onClick={() => {
+                        sessionStorage.setItem("SELECTED_SUBJECT", even.key);
+                        window.location = "/resources";
+                      }}
                       class="col-lg-4 col-md-4 d-flex align-items-stretch  cardspace"
                     >
                       <div class="icon-box">
                         <div class="icon">
                           {" "}
                           <h4>
-                            <a href="/">{even.abbreviation}</a>
+                            <a
+                              href="/resources"
+                              onClick={() => {
+                                sessionStorage.setItem(
+                                  "SELECTED_SUBJECT",
+                                  even.key
+                                );
+                              }}
+                            >
+                              {even.abbreviation}
+                            </a>
                           </h4>{" "}
                         </div>
 
                         <div class="none">
                           {" "}
                           <p>
-                            <a href="/">{even.name}</a>
+                            <a
+                              href="/resources"
+                              onClick={() => {
+                                sessionStorage.setItem(
+                                  "SELECTED_SUBJECT",
+                                  even.key
+                                );
+                              }}
+                            >
+                              {even.name}
+                            </a>
                           </p>
                         </div>
                       </div>
