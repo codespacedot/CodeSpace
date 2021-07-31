@@ -44,12 +44,12 @@ function header() {
               </ul>
             </li>
             <li>
-              <a className="nav-link" href="/">
+              <a className="nav-link" href="/placements">
                 Placements
               </a>
             </li>
             <li>
-              <a className="nav-link" href="/">
+              <a className="nav-link" href="/certification">
                 Certification
               </a>
             </li>

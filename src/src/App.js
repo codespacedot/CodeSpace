@@ -11,6 +11,9 @@ import ForgotPassword from "./pages/forgotPassword";
 import Profile from "./pages/profile";
 import PageNotFound from "./pages/pageNotFound";
 import ErrorPage from "./pages/errorPage";
+import Placements from "./pages/placements";
+import Certification from "./pages/certification";
+import Aboutus from "./pages/aboutus";
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
           <Route exact path="/forgot-password" component={ForgotPassword} />
           <Route exact path="/pagenotfound" component={PageNotFound} />
           <Route exact path="/error" component={ErrorPage} />
+          <Route exact path="/placements" component={Placements} />
+          <Route exact path="/certification" component={Certification} />
+          <Route exact path="/aboutus" component={Aboutus} />
         </Switch>
       </Router>
     </div>

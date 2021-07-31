@@ -138,3 +138,55 @@ input[type="color"]:focus,
   color: var(--clr-foreground);
   background-color: var(--clr-background);
 }
+
+.modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 0px;
+  color: var(--clr-background);
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin-left: 5%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: 0.1rem;
+  outline: 0;
+  border: solid 1px var(--clr-foreground);
+}
+.close-btn {
+  color: var(--clr-foreground);
+  background-color: var(--clr-background);
+  border: none;
+}
+.close-btn i {
+  font-size: 1.5rem;
+}
+.sucess i {
+  color: #0761d1;
+}
+.fail i {
+  color: #e00;
+}
+.sucess,
+.fail {
+  background-color: var(--clr-background);
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 3rem;
+}
+#modal-message h4 {
+  font-size: 2rem;
+  color: var(--clr-foreground);
+  text-align: center;
+}
+#modal-message h5 {
+  font-size: 1rem;
+  color: var(--clr-foreground);
+  text-align: center;
+}
