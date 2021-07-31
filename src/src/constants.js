@@ -10,3 +10,4 @@ export const passwordNotMatches = "Password does not match";
 export const noAccount = "Account does not exists.";
 export const newPassword = "New password set successfully.";
 export const invalidVerificationCode = "Invalid verification code.";
+export const gitLabLink = "https://github.com/codespacedot/";

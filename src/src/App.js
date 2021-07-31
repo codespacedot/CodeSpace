@@ -14,6 +14,7 @@ import ErrorPage from "./pages/errorPage";
 import Placements from "./pages/placements";
 import Certification from "./pages/certification";
 import Aboutus from "./pages/aboutus";
+import Resources from "./pages/resources";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/placements" component={Placements} />
           <Route exact path="/certification" component={Certification} />
           <Route exact path="/aboutus" component={Aboutus} />
+          <Route exact path="/resources" component={Resources} />
         </Switch>
       </Router>
     </div>
