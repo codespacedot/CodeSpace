@@ -5,6 +5,7 @@ import axios from "axios";
 import { sha256 } from "js-sha256";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import CommonToast from "../components/commontoast";
 
 //To set width of loading bar
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +34,10 @@ function Signup() {
   const [cpassError, setcpassError] = useState("");
   const [password, setpassword] = useState("");
   const [cpassword, setcpassword] = useState("");
+  const [toastVisible, settoastVisible] = useState(false);
+  const [toastError, setToastError] = useState("");
   const regEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+
   const classes = useStyles();
 
   //To validate form and create user
@@ -99,16 +103,28 @@ function Signup() {
         .then((res) => {
           if (res.status === 201) {
             setisLoading(false);
-            window.location = "/login";
+            settoastVisible(true);
+            setToastError("Account created successfully! Redirecting ...");
+            setTimeout(() => {
+              settoastVisible(false);
+              window.location = "/login";
+            }, 3000);
           }
         })
         .catch((error) => {
           if (error.response.data.detail.ERROR === "User already exists.") {
             setisLoading(false);
-            alert("User already exists.");
+            settoastVisible(true);
+            setToastError("Email address already registered.");
+            setTimeout(() => {
+              settoastVisible(false);
+            }, 3000);
           } else {
             setisLoading(false);
-            alert("Error !Please try again");
+            setToastError("Error! Please try again.");
+            setTimeout(() => {
+              settoastVisible(false);
+            }, 3000);
           }
         });
     }
@@ -365,6 +381,31 @@ function Signup() {
                       value="Sign Up"
                       onClick={signUpUser}
                     />
+                  </div>
+                  {/* Displaying toast for error */}
+                  <div>
+                    {toastVisible &&
+                    toastError ===
+                      "Account created successfully! Redirecting ..." ? (
+                      <div>
+                        <CommonToast
+                          open={toastVisible}
+                          backgroundColor="#0761d1"
+                          type="info"
+                          message={toastError}
+                        />
+                      </div>
+                    ) : toastVisible &&
+                      toastError === "Email address already registered." ? (
+                      <div>
+                        <CommonToast
+                          open={toastVisible}
+                          backgroundColor="#e00"
+                          type="error"
+                          message={toastError}
+                        />
+                      </div>
+                    ) : null}
                   </div>
                   <div className="col-12 col-lg-10 col-md-12 bottom form-link  align-items-center justify-content-center">
                     <p>

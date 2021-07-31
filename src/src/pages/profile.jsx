@@ -33,9 +33,12 @@ function Profile() {
       .then((res) => {
         if (res.status === 200) {
           setisLoading(false);
+          sessionStorage.removeItem("CS_TOKEN");
+          sessionStorage.removeItem("USER_PROFILE");
           window.location = "/login";
         }
-      });
+      })
+      .catch((error) => {});
   };
   return (
     <div>

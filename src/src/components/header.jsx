@@ -92,7 +92,7 @@ function header() {
             }}
             className="get-started-btn"
           >
-            Log Out
+            Logout
           </a>
         ) : sessionStorage.getItem("CS_TOKEN") !== null ? (
           <a href="/profile" className="get-started-btn">

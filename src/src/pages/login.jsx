@@ -5,6 +5,7 @@ import axios from "axios";
 import { sha256 } from "js-sha256";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import CommonToast from "../components/commontoast";
 const formData = require("form-data");
 
 //To set width of loading bar
@@ -27,6 +28,9 @@ function Login() {
   const [passwordError, setpasswordError] = useState("");
   const [isLoading, setisLoading] = useState(false);
   const regEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+  const [toastVisible, settoastVisible] = useState(false);
+  const [toastError, setToastError] = useState("");
+
   const classes = useStyles();
 
   //Function to check and validateb email
@@ -102,10 +106,18 @@ function Login() {
         .catch((error) => {
           if (error.response.data.detail.ERROR === "Invalid credentials.") {
             setisLoading(false);
-            alert("Invalid credentials. Please check username and password");
+            settoastVisible(true);
+            setToastError("Invalid credentials.");
+            setTimeout(() => {
+              settoastVisible(false);
+            }, 3000);
           } else {
             setisLoading(false);
-            alert("Error ! Please try again");
+            settoastVisible(true);
+            setToastError("Error ! Please try again.");
+            setTimeout(() => {
+              settoastVisible(false);
+            }, 3000);
           }
         });
     }
@@ -239,6 +251,32 @@ function Login() {
                       value="Log In"
                       onClick={logInUser}
                     />
+                  </div>
+                  {/* Displaying toast for error */}
+                  <div>
+                    {toastVisible &&
+                    toastError === "Error ! Please try again." ? (
+                      <div>
+                        <CommonToast
+                          open={toastVisible}
+                          backgroundColor="#e00"
+                          message={toastError}
+                          type="error"
+                        />
+                      </div>
+                    ) : null}
+                  </div>
+                  <div>
+                    {toastVisible && toastError === "Invalid credentials." ? (
+                      <div>
+                        <CommonToast
+                          open={toastVisible}
+                          backgroundColor="#e00"
+                          type="error"
+                          message={toastError}
+                        />
+                      </div>
+                    ) : null}
                   </div>
                   <div className="col-12 col-xl-8 col-lg-8 col-md-12 col-sm-12 bottom form-link  align-items-center justify-content-center">
                     <p>

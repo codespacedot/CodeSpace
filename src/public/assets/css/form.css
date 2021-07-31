@@ -118,3 +118,23 @@ input[type="color"]:focus,
   background-color: var(--clr-background);
   color: var(--clr-foreground);
 }
+.mod-head h5 {
+  font-size: calc(5px + 1rem);
+}
+.mod-head {
+  display: flex;
+  align-items: left;
+}
+
+.modal-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+  border-bottom: solid 1px var(--clr-foreground);
+  color: var(--clr-foreground);
+  background-color: var(--clr-background);
+}
