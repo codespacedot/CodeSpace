@@ -6,6 +6,14 @@ import { sha256 } from "js-sha256";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Toast from "../components/toast";
+import {
+  invalidEmail,
+  requiredField,
+  regEmail,
+  invalidCredentials,
+  formError,
+  formPasswordError,
+} from "../constants";
 const formData = require("form-data");
 
 //To set width of loading bar
@@ -27,10 +35,8 @@ function Login() {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const regEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
-
   const classes = useStyles();
 
   //Function to check and validate email
@@ -38,21 +44,21 @@ function Login() {
     setUsername(e);
     if (e.match(regEmail)) {
       setUsernameError("");
-    } else setUsernameError("Please enter valid email address");
+    } else setUsernameError(invalidEmail);
   };
 
   //Function for Login student
   const logInUser = () => {
     //checking all fields are properly filled or not
     if (username === "" && password === "") {
-      setUsernameError("This field is required");
-      setPasswordError("This field is required");
+      setUsernameError(requiredField);
+      setPasswordError(requiredField);
     } else if (username === "") {
-      setUsernameError("This field is required");
+      setUsernameError(requiredField);
     } else if (password === "") {
-      setPasswordError("This field is required");
+      setPasswordError(requiredField);
     } else if (username.length > 0 && !username.match(regEmail)) {
-      setUsernameError("Please enter valid email address");
+      setUsernameError(invalidEmail);
     } else {
       setIsLoading(true);
       setUsernameError("");
@@ -85,6 +91,7 @@ function Login() {
           if (res.status === 200) {
             sessionStorage.setItem("CS_TOKEN", res.data.access_token);
             const userToken = sessionStorage.getItem("CS_TOKEN");
+            console.log("token is", userToken);
             axios
               .request({
                 method: "GET",
@@ -105,15 +112,15 @@ function Login() {
         })
         .catch((error) => {
           setIsLoading(false);
-          if (error.response.data.detail.ERROR === "Invalid credentials.") {
+          if (error.response.data.detail.ERROR === invalidCredentials) {
             setToastVisible(true);
-            setToastMessage("Invalid credentials.");
+            setToastMessage(invalidCredentials);
             setTimeout(() => {
               setToastVisible(false);
             }, 2500);
           } else {
             setToastVisible(true);
-            setToastMessage("Error, please try again.");
+            setToastMessage(formError);
             setTimeout(() => {
               setToastVisible(false);
             }, 2500);
@@ -168,7 +175,7 @@ function Login() {
                         style={
                           usernameError !== ""
                             ? { borderColor: "#dc3545" }
-                            : (username.match(regEmail) && username.length > 0)
+                            : username.match(regEmail) && username.length > 0
                             ? { borderColor: "#198754" }
                             : null
                         }
@@ -198,7 +205,7 @@ function Login() {
                           style={
                             password.length < 7 && passwordError !== ""
                               ? { borderColor: "#dc3545" }
-                              : (password.length > 7 && passwordError === "")
+                              : password.length > 7 && passwordError === ""
                               ? { borderColor: "#198754" }
                               : null
                           }
@@ -208,9 +215,7 @@ function Login() {
                               setPassword(e.target.value);
                               setPasswordError("");
                             } else {
-                              setPasswordError(
-                                "Password must be greater than 8 characters"
-                              );
+                              setPasswordError(formPasswordError);
                             }
                           }}
                           required
@@ -264,7 +269,7 @@ function Login() {
                     ) : null}
                   </div>
                   <div>
-                    {toastVisible && toastMessage === "Invalid credentials." ? (
+                    {toastVisible && toastMessage === invalidCredentials ? (
                       <div>
                         <Toast
                           open={toastVisible}
@@ -277,7 +282,10 @@ function Login() {
                   </div>
                   <div className="col-12 col-xl-8 col-lg-8 col-md-12 col-sm-12 bottom form-link  align-items-center justify-content-center">
                     <p>
-                      Dont have an account? <a href="/signup"><span>Sign Up</span></a>
+                      Dont have an account?{" "}
+                      <a href="/signup">
+                        <span>Sign Up</span>
+                      </a>
                       <br />
                       <a href="/forgot-password">
                         <span>Forgot Your Password?</span>

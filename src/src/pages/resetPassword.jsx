@@ -6,6 +6,13 @@ import { sha256 } from "js-sha256";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Toast from "../components/toast";
+import {
+  requiredField,
+  newPassword,
+  formPasswordError,
+  invalidVerificationCode,
+  passwordNotMatches,
+} from "../constants";
 
 //To set width of loading bar
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +44,7 @@ function ResetPassword() {
   const checkPassword = (e) => {
     setConfirmPassword(e);
     if (password !== confirmPassword) {
-      setConfirmPasswordError("Password does not match");
+      setConfirmPasswordError(passwordNotMatches);
     } else {
       setConfirmPasswordError("");
     }
@@ -50,15 +57,15 @@ function ResetPassword() {
       (confirmPassword === undefined || confirmPassword === "") &&
       (code === undefined || code === "")
     ) {
-      setPasswordError("This field is required");
-      setConfirmPasswordError("This field is required");
-      setVerificationError("This field is required");
+      setPasswordError(requiredField);
+      setConfirmPasswordError(requiredField);
+      setVerificationError(requiredField);
     } else if (password === "" && password === undefined) {
-      setPasswordError("This field is required");
+      setPasswordError(requiredField);
     } else if (confirmPassword === "" && confirmPassword === undefined) {
-      setConfirmPasswordError("This field is required");
+      setConfirmPasswordError(requiredField);
     } else if (code === "" || code === undefined) {
-      setVerificationError("This field is required");
+      setVerificationError(requiredField);
     } else {
       setIsLoading(true);
       const hash = sha256.create();
@@ -81,7 +88,7 @@ function ResetPassword() {
           if (res.status === 200) {
             setIsLoading(false);
             setToastVisible(true);
-            setToastMessage("New password set successfully.");
+            setToastMessage(newPassword);
             setTimeout(() => {
               setToastVisible(false);
               window.location = "/login";
@@ -91,7 +98,7 @@ function ResetPassword() {
         .catch((_) => {
           setIsLoading(false);
           setToastVisible(true);
-          setToastMessage("Invalid verification code.");
+          setToastMessage(invalidVerificationCode);
           setTimeout(() => {
             setToastVisible(false);
           }, 2500);
@@ -149,7 +156,7 @@ function ResetPassword() {
                           style={
                             password.length < 7 && passwordError !== ""
                               ? { borderColor: "#dc3545" }
-                              : (password.length > 7 && passwordError === "")
+                              : password.length > 7 && passwordError === ""
                               ? { borderColor: "#198754" }
                               : null
                           }
@@ -162,9 +169,7 @@ function ResetPassword() {
                               setPassword(e.target.value);
                               setPasswordError("");
                             } else {
-                              setPasswordError(
-                                "Password must be greater than 8 characters"
-                              );
+                              setPasswordError(formPasswordError);
                             }
                           }}
                         />
@@ -186,7 +191,9 @@ function ResetPassword() {
                         </span>
                       </div>
                       <div
-                        style={passwordError !== "" ? { color: "#dc3545" } : null}
+                        style={
+                          passwordError !== "" ? { color: "#dc3545" } : null
+                        }
                       >
                         {passwordError}
                       </div>
@@ -199,9 +206,11 @@ function ResetPassword() {
                           type={!toggleEye1 ? "password" : "text"}
                           className="form-control"
                           style={
-                            confirmPassword.length < 7 && confirmPasswordError !== ""
+                            confirmPassword.length < 7 &&
+                            confirmPasswordError !== ""
                               ? { borderColor: "#dc3545" }
-                              : (confirmPassword.length > 7 && confirmPasswordError === "")
+                              : confirmPassword.length > 7 &&
+                                confirmPasswordError === ""
                               ? { borderColor: "#198754" }
                               : null
                           }
@@ -217,7 +226,7 @@ function ResetPassword() {
                               checkPassword(e.target.value);
                               setConfirmPasswordError("");
                             } else {
-                              setConfirmPasswordError("Password does not match");
+                              setConfirmPasswordError(passwordNotMatches);
                             }
                           }}
                         />
@@ -239,7 +248,11 @@ function ResetPassword() {
                         </span>
                       </div>
                       <div
-                        style={confirmPasswordError !== "" ? { color: "#dc3545" } : null}
+                        style={
+                          confirmPasswordError !== ""
+                            ? { color: "#dc3545" }
+                            : null
+                        }
                       >
                         {confirmPasswordError}
                       </div>
@@ -253,7 +266,7 @@ function ResetPassword() {
                         style={
                           verificationError !== "" && code.length < 6
                             ? { borderColor: "#dc3545" }
-                            : (verificationError === "" && code.length === 6)
+                            : verificationError === "" && code.length === 6
                             ? { borderColor: "#198754" }
                             : null
                         }
@@ -285,7 +298,7 @@ function ResetPassword() {
                   </div>
                   {/* Displaying toast for error */}
                   <div>
-                    {toastVisible && toastMessage === "New password set successfully." ? (
+                    {toastVisible && toastMessage === newPassword ? (
                       <div>
                         <Toast
                           open={toastVisible}
@@ -296,7 +309,7 @@ function ResetPassword() {
                       </div>
                     ) : null}
                     {toastVisible &&
-                    toastMessage === "Invalid verification code." ? (
+                    toastMessage === invalidVerificationCode ? (
                       <div>
                         <Toast
                           open={toastVisible}

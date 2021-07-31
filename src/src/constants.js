@@ -1,0 +1,12 @@
+export const invalidEmail = "Please enter valid email address";
+export const requiredField = "This field is required";
+export const regEmail = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+export const invalidCredentials = "Invalid credentials.";
+export const formError = "Error, please try again.";
+export const formPasswordError = "Password must be greater than 8 characters";
+export const userExists = "User already exists.";
+export const successAccount = "Account created successfully.";
+export const passwordNotMatches = "Password does not match";
+export const noAccount = "Account does not exists.";
+export const newPassword = "New password set successfully.";
+export const invalidVerificationCode = "Invalid verification code.";

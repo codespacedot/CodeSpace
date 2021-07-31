@@ -9,6 +9,8 @@ import Login from "./pages/login";
 import ResetPassword from "./pages/resetPassword";
 import ForgotPassword from "./pages/forgotPassword";
 import Profile from "./pages/profile";
+import PageNotFound from "./pages/pageNotFound";
+import ErrorPage from "./pages/errorPage";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/reset-password" component={ResetPassword} />
           <Route exact path="/forgot-password" component={ForgotPassword} />
+          <Route exact path="/pagenotfound" component={PageNotFound} />
+          <Route exact path="/error" component={ErrorPage} />
         </Switch>
       </Router>
     </div>

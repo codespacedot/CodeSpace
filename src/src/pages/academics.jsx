@@ -41,7 +41,7 @@ function Academics() {
             setYearData(result);
             setIsLoading(false);
           }
-        })
+        });
     } else {
       setYear(0);
       setIsLoading(false);
