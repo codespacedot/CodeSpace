@@ -91,7 +91,6 @@ function Login() {
           if (res.status === 200) {
             sessionStorage.setItem("CS_TOKEN", res.data.access_token);
             const userToken = sessionStorage.getItem("CS_TOKEN");
-            console.log("token is", userToken);
             axios
               .request({
                 method: "GET",

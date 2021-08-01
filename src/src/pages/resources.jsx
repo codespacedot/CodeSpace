@@ -25,7 +25,6 @@ function Resources() {
         })
         .catch((error) => {
           setIsLoading(false);
-          console.log("error is", error.data);
         });
     } else {
       window.history.back();
