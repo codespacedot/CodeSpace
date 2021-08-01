@@ -20,7 +20,8 @@ function Resources() {
         .get(`${REACT_APP_CS_API}/api/academics/resources/${selectedSubject}`)
         .then((res) => {
           setIsLoading(false);
-          setLibraryData(res.data);
+          setLibraryData(res.data.LIBRARY);
+          setExamData(res.data.EXAM);
         })
         .catch((error) => {
           setIsLoading(false);
@@ -94,16 +95,21 @@ function Resources() {
                               <h2
                                 className="sp"
                                 style={{
-                                  fontSize: "60px",
-                                  marginTop: "150px",
+                                  fontSize: "40px",
+                                  marginTop: "80px",
                                 }}
                               >
-                                No resources found
+                                {" "}
+                                <span>
+                                  {" "}
+                                  <i class="fa fa-folder-open-o"></i>
+                                </span>{" "}
+                                No resources
                               </h2>
                             </div>
                           </div>
                         ) : (
-                          libraryData.LIBRARY.map((data) => {
+                          libraryData.map((data) => {
                             return (
                               <div
                                 key={data.url}
@@ -122,6 +128,7 @@ function Resources() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                       >
+                                        {" "}
                                         {data.title}
                                       </a>
                                     </p>
@@ -146,16 +153,20 @@ function Resources() {
                               <h2
                                 className="sp"
                                 style={{
-                                  fontSize: "60px",
-                                  marginTop: "150px",
+                                  fontSize: "40px",
+                                  marginTop: "80px",
                                 }}
                               >
-                                No resources found
+                                <span>
+                                  {" "}
+                                  <i class="fa fa-folder-open-o"></i>
+                                </span>{" "}
+                                No resources
                               </h2>
                             </div>
                           </div>
                         ) : (
-                          libraryData.EXAM.map((data) => {
+                          examData.map((data) => {
                             return (
                               <div>
                                 <div
