@@ -111,7 +111,7 @@ function FooterMobile() {
                   </li>
                   <li>
                     <a
-                      href="https://csdot.ml"
+                      href="/upload-resources"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

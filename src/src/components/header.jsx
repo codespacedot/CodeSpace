@@ -39,7 +39,7 @@ function header() {
                   <a href="/academics">Second Year</a>
                 </li>
                 <li>
-                  <a href="/">Upload Resources</a>
+                  <a href="/upload-resources">Upload Resources</a>
                 </li>
               </ul>
             </li>
