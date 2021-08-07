@@ -9,6 +9,7 @@ function Resources() {
   const selectedSubject = sessionStorage.getItem("SELECTED_SUBJECT");
   const [libraryData, setLibraryData] = useState([]);
   const [examData, setExamData] = useState([]);
+  const [subjectName, setsubjectName] = useState("");
   //Taking environment variables
   const { REACT_APP_CS_API } = process.env;
 
@@ -22,6 +23,7 @@ function Resources() {
           setIsLoading(false);
           setLibraryData(res.data.LIBRARY);
           setExamData(res.data.EXAM);
+          setsubjectName(res.data.SUBJECT_NAME);
         })
         .catch((error) => {
           setIsLoading(false);
@@ -47,7 +49,7 @@ function Resources() {
               <div className="container  align-items-center ">
                 <div className="row justify-content-center heading ">
                   <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 ">
-                    <h1 className="sp">Subject Name</h1>
+                    <h2 className="sp">{subjectName}</h2>
                   </div>
                 </div>
                 <div className="row " style={{ marginTop: "20px" }}>
@@ -94,8 +96,8 @@ function Resources() {
                               <h2
                                 className="sp"
                                 style={{
-                                  fontSize: "40px",
-                                  marginTop: "80px",
+                                  fontSize: "30px",
+                                  marginTop: "32px",
                                 }}
                               >
                                 {" "}
@@ -152,8 +154,8 @@ function Resources() {
                               <h2
                                 className="sp"
                                 style={{
-                                  fontSize: "40px",
-                                  marginTop: "80px",
+                                  fontSize: "30px",
+                                  marginTop: "32px",
                                 }}
                               >
                                 <span>

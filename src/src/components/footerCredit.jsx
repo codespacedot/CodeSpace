@@ -38,7 +38,7 @@ class FooterCredit extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-3 col-md-6 footer-links">
+              <div class="col-lg-2 col-md-6 footer-links">
                 <h4>Links</h4>
                 <ul>
                   <li>
@@ -88,7 +88,42 @@ class FooterCredit extends Component {
                   </li>
                 </ul>
               </div>
-              <div className="col-lg-3 col-md-6 footer-links">
+              <div class="col-lg-2 col-md-6 footer-links">
+                <h4>Academics</h4>
+                <ul>
+                  <li
+                    onClick={() => {
+                      sessionStorage.setItem("year", 4);
+                    }}
+                  >
+                    <a href="/academics">Final Year</a>
+                  </li>
+                  <li
+                    onClick={() => {
+                      sessionStorage.setItem("year", 3);
+                    }}
+                  >
+                    <a href="/academics">Third Year</a>
+                  </li>
+                  <li
+                    onClick={() => {
+                      sessionStorage.setItem("year", 4);
+                    }}
+                  >
+                    <a href="/academics">SecondYear</a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://csdot.ml"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Upload Resource
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-2 col-md-6 footer-links">
                 <h4>Made With</h4>
                 <ul>
                   <li>
@@ -138,7 +173,7 @@ class FooterCredit extends Component {
                   </li>
                 </ul>
               </div>
-              <div className="col-lg-3 col-md-6">
+              <div class="col-lg-3 col-md-6">
                 <h4>Contact Us</h4>
                 <p>
                   Department of Technology <br />
@@ -152,7 +187,7 @@ class FooterCredit extends Component {
                   </a>
                   <br />
                 </p>
-              </div>
+              </div>{" "}
             </div>
           </div>
           <div className="copyright">

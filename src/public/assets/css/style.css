@@ -236,7 +236,8 @@
 
 body {
   font-family: "Tahoma";
-  color: var(--clr-background);
+  color: var(--clr-foreground);
+  background-color: var(--clr-background);
 }
 
 a {
@@ -1071,5 +1072,24 @@ section {
 .nav-link:hover,
 .nav-tabs:focus,
 .nav-link:focus {
+  color: var(--clr-foreground);
+}
+
+.longtext p {
+  color: var(--clr-foreground);
+  font-size: 15px;
+}
+.longtext h1 {
+  font-size: 2rem;
+}
+.longtext h2 {
+  font-size: 1.5rem;
+}
+.longtext h3 {
+  font-size: 1rem;
+}
+
+.longtext ul li {
+  list-style-type: square;
   color: var(--clr-foreground);
 }

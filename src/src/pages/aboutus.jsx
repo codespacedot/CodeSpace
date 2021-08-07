@@ -18,11 +18,10 @@ function Aboutus() {
                 <a className="splogo" href="/">
                   &lt;/&gt;
                 </a>
-                <a href="/"> CodeSpace</a>
+                <a href="/">CodeSpace</a>
               </h1>
             </div>
             <div className="col-10 about" style={{ marginTop: "25px" }}>
-              {" "}
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -42,14 +41,13 @@ function Aboutus() {
                   <a href="/">
                     {" "}
                     <img
-                      src="/assets/img/avatar.png"
+                      src="assets/img/avatar.png"
                       className="img-fluid avatar avatar-medium shadow rounded-pill"
                       alt=""
                     />
                   </a>
                   <div className="content mt-3">
                     <a href="/">
-                      {" "}
                       <h4 className="title mb-0">FristName LastName</h4>
                     </a>
                     <small className="text-muted">Role</small>
@@ -62,14 +60,13 @@ function Aboutus() {
                   <a href="/">
                     {" "}
                     <img
-                      src="/assets/img/avatar.png"
+                      src="assets/img/avatar.png"
                       className="img-fluid avatar avatar-medium shadow rounded-pill"
                       alt=""
                     />
                   </a>
                   <div className="content mt-3">
                     <a href="/">
-                      {" "}
                       <h4 className="title mb-0">FristName LastName</h4>
                     </a>
                     <small className="text-muted">Role</small>
@@ -82,14 +79,13 @@ function Aboutus() {
                   <a href="/">
                     {" "}
                     <img
-                      src="/assets/img/avatar.png"
+                      src="assets/img/avatar.png"
                       className="img-fluid avatar avatar-medium shadow rounded-pill"
                       alt=""
                     />
                   </a>
                   <div className="content mt-3">
                     <a href="/">
-                      {" "}
                       <h4 className="title mb-0">FristName LastName</h4>
                     </a>
                     <small className="text-muted">Role</small>
@@ -102,14 +98,13 @@ function Aboutus() {
                   <a href="/">
                     {" "}
                     <img
-                      src="/assets/img/avatar.png"
+                      src="assets/img/avatar.png"
                       className="img-fluid avatar avatar-medium shadow rounded-pill"
                       alt=""
                     />
                   </a>
                   <div className="content mt-3">
                     <a href="/">
-                      {" "}
                       <h4 className="title mb-0">FristName LastName</h4>
                     </a>
                     <small className="text-muted">Role</small>

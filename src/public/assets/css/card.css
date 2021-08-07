@@ -107,3 +107,115 @@
 .clr-fore a i {
   color: var(--clr-foreground);
 }
+
+/* _____________Profile_________ */
+.gear {
+  padding-right: 1%;
+  color: var(--clr-foreground);
+}
+
+.fa-cog {
+  animation: fa-spin 2s infinite linear;
+  font-size: 1.5rem;
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+.profile h6 {
+  display: inline-block !important;
+}
+.card-profile .icon-box {
+  text-align: center;
+  border: 1px solid var(--clr-foreground);
+  padding: 8px;
+  transition: all ease-in-out 0.3s;
+  background: var(--clr-background);
+  height: auto;
+  border-radius: 7px;
+  min-height: 100px;
+  padding-top: 10px;
+  max-width: 340px;
+  min-width: 340px;
+}
+.card-profile h2 {
+  color: var(--clr-foreground);
+}
+.profile i {
+  font-size: 32px;
+  padding: 10px;
+}
+.profile i:hover {
+  transform: translateY(-2px);
+}
+.profile h4,
+.profile h5 {
+  padding: 10px;
+}
+
+.skills {
+  border: solid 1px var(--clr-foreground);
+  color: var(--clr-background);
+  border-radius: 0.25rem;
+  background: var(--clr-foreground);
+  padding: 5px;
+  margin: 10px;
+}
+.skills:hover,
+.skills-change:hover,
+.skills-delete:hover,
+.confirm:hover {
+  transform: translateY(-2px);
+}
+
+.skills-change {
+  border: solid 1px #0761d1;
+  color: var(--clr-foreground);
+  border-radius: 0.25rem;
+  background: var(--clr-background);
+  padding: 5px;
+  margin: 10px;
+  font-size: 15px;
+}
+.skills-delete {
+  border: solid 1px #e00;
+  color: var(--clr-foreground);
+  border-radius: 0.25rem;
+  background: #e00;
+  padding: 5px;
+  margin: 10px;
+  font-size: 15px;
+}
+.confirm {
+  border: solid 1px #0761d1;
+  color: var(--clr-foreground);
+  border-radius: 0.25rem;
+  background: #0761d1;
+  padding: 5px;
+  margin: 10px;
+  font-size: 15px;
+}
+
+.profile-button {
+  border: none;
+  background: var(--clr-background);
+  margin: 5px;
+}

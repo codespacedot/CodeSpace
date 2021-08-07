@@ -91,6 +91,16 @@ input[type="color"]:focus,
   font-size: 40px;
   text-align: center;
 }
+.heading h2 {
+  margin-top: 17%;
+  margin-bottom: 2%;
+  margin-left: 0px;
+  margin-right: 0px;
+  color: var(--clr-foreground);
+  font-weight: 600;
+  font-size: 32px;
+  text-align: center;
+}
 
 .input-group
   > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
@@ -125,6 +135,9 @@ input[type="color"]:focus,
   display: flex;
   align-items: left;
 }
+.modal {
+  background-color: rgba(0, 0, 0, 0.7);
+}
 
 .modal-header {
   display: flex;
@@ -145,6 +158,9 @@ input[type="color"]:focus,
   padding: 0px;
   color: var(--clr-background);
 }
+.modal-body form {
+  background-color: var(--clr-background);
+}
 
 .modal-content {
   position: relative;
@@ -158,7 +174,18 @@ input[type="color"]:focus,
   border-radius: 0.1rem;
   outline: 0;
   border: solid 1px var(--clr-foreground);
+  animation-name: modalopen;
+  animation-duration: var(--modal-duration);
 }
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .close-btn {
   color: var(--clr-foreground);
   background-color: var(--clr-background);
@@ -189,4 +216,30 @@ input[type="color"]:focus,
   font-size: 1rem;
   color: var(--clr-foreground);
   text-align: center;
+}
+
+/* Modal Animation */
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Form Select */
+.form-select {
+  color: var(--clr-foreground);
+  background-color: var(--clr-background);
+}
+#library {
+  display: none;
+}
+#exam {
+  display: none;
 }
