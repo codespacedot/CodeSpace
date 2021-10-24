@@ -68,18 +68,14 @@ function EditProfile() {
   const batch = parseInt(convertBatch);
   const [updatedBatch, setUpdatedBatch] = useState(batch);
   const userToken = sessionStorage.getItem("CS_TOKEN");
-  console.log(
-    "Profile pic is",
-    profilePicture,
-    "and preview img is",
-    previewImg
-  );
+
   //Preview image
   useEffect(() => {
     if (previewImg) {
       setProfilePicture(URL.createObjectURL(previewImg));
       parseUserData.profile_pic = profilePicture;
     }
+    // eslint-disable-next-line
   }, [previewImg, parseUserData.profile_pic]);
 
   //Taking environment variables
@@ -278,7 +274,6 @@ function EditProfile() {
     }
     var formData = new FormData();
     formData.append("image", previewImg);
-    console.log(profilePicture, previewImg, parseUserData.profile_pic);
     await axios
       .request({
         method: "PUT",
