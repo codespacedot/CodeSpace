@@ -39,7 +39,7 @@ function header() {
                   <a href="/academics">Second Year</a>
                 </li>
                 <li>
-                  <a href="/">Upload Resources</a>
+                  <a href="/upload-resources">Upload Resources</a>
                 </li>
               </ul>
             </li>
@@ -83,7 +83,8 @@ function header() {
           <a href="/signup" className="get-started-btn">
             Sign Up
           </a>
-        ) : window.location.pathname === "/profile" ? (
+        ) : window.location.pathname === "/profile" ||
+          window.location.pathname === "/edit-profile" ? (
           <a
             href="/login"
             onClick={() => {

@@ -15,6 +15,8 @@ import Placements from "./pages/placements";
 import Certification from "./pages/certification";
 import Aboutus from "./pages/aboutus";
 import Resources from "./pages/resources";
+import UploadResources from "./pages/uploadresources";
+import EditProfile from "./pages/editprofile";
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/profile" component={Profile} />
+          <Route exact path="/edit-profile" component={EditProfile} />
           <Route exact path="/reset-password" component={ResetPassword} />
           <Route exact path="/forgot-password" component={ForgotPassword} />
           <Route exact path="/pagenotfound" component={PageNotFound} />
@@ -34,6 +37,7 @@ function App() {
           <Route exact path="/certification" component={Certification} />
           <Route exact path="/aboutus" component={Aboutus} />
           <Route exact path="/resources" component={Resources} />
+          <Route exact path="/upload-resources" component={UploadResources} />
         </Switch>
       </Router>
     </div>
