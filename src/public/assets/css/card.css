@@ -177,7 +177,12 @@
   border-radius: 0.25rem;
   background: var(--clr-foreground);
   padding: 5px;
-  margin: 10px;
+  width: auto;
+  margin: 5px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
 }
 .skills:hover,
 .skills-change:hover,

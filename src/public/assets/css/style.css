@@ -1093,3 +1093,9 @@ section {
   list-style-type: square;
   color: var(--clr-foreground);
 }
+#changeProfile:hover {
+  cursor: pointer;
+}
+#newProfile {
+  display: none;
+}

@@ -6,6 +6,7 @@ import { sha256 } from "js-sha256";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Toast from "../components/toast";
+import AppBar from "@material-ui/core/AppBar";
 import {
   invalidEmail,
   requiredField,
@@ -90,23 +91,7 @@ function Login() {
         .then((res) => {
           if (res.status === 200) {
             sessionStorage.setItem("CS_TOKEN", res.data.access_token);
-            const userToken = sessionStorage.getItem("CS_TOKEN");
-            axios
-              .request({
-                method: "GET",
-                url: `${REACT_APP_CS_API}/api/users/me`,
-                headers: {
-                  Authorization: `Bearer ${userToken}`,
-                  "Access-Control-Allow-Origin": "*",
-                },
-              })
-              .then((resUser) => {
-                const userData = JSON.stringify(resUser.data);
-                setIsLoading(false);
-                sessionStorage.setItem("USER_PROFILE", userData);
-                window.location = "/profile";
-              })
-              .catch((_) => {});
+            window.location = "/profile";
           }
         })
         .catch((error) => {
@@ -137,10 +122,12 @@ function Login() {
         <div>
           {/* Calling Loader after click on login button */}
           <div className={classes.root}>
-            <LinearProgress
-              color="primary"
-              className={isLoading ? "d-block" : "d-none"}
-            />
+            <AppBar position="fixed">
+              <LinearProgress
+                color="primary"
+                className={isLoading ? "d-block" : "d-none"}
+              />
+            </AppBar>
           </div>
           {/* Header component calling here */}
           <Header />

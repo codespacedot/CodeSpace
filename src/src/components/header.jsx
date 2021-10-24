@@ -83,7 +83,8 @@ function header() {
           <a href="/signup" className="get-started-btn">
             Sign Up
           </a>
-        ) : window.location.pathname === "/profile" ? (
+        ) : window.location.pathname === "/profile" ||
+          window.location.pathname === "/edit-profile" ? (
           <a
             href="/login"
             onClick={() => {

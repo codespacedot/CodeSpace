@@ -6,6 +6,7 @@ import { sha256 } from "js-sha256";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Toast from "../components/toast";
+import AppBar from "@material-ui/core/AppBar";
 import {
   invalidEmail,
   requiredField,
@@ -161,10 +162,12 @@ function Signup() {
         <div>
           {/* Loader after click on sign up button */}
           <div className={classes.root}>
-            <LinearProgress
-              color="primary"
-              className={isLoading ? "d-block" : "d-none"}
-            />
+            <AppBar position="fixed">
+              <LinearProgress
+                color="primary"
+                className={isLoading ? "d-block" : "d-none"}
+              />
+            </AppBar>
           </div>
 
           {/* Header component calling */}

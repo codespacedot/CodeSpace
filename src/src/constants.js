@@ -12,3 +12,15 @@ export const newPassword = "New password set successfully.";
 export const invalidVerificationCode = "Invalid verification code.";
 export const gitLabLink = "https://github.com/codespacedot/";
 export const emptyData = "NA";
+export const githubLink = "github.com/";
+export const linkedinLink = "linkedin.com/in/";
+export const confirmationMessage = "Do you really want to Delete your account?";
+export const editProfileFormMessage =
+  "Firstname,Lastname,Email Id is required.";
+export const errorForBatch = "Please enter valid passing year.";
+export const changeDetailsError = "Changes required";
+export const changesSaved = "Changes saved.";
+export const passwordChangeSuccessfully = "Password change successfully";
+export const errorTryAgain = "Try again";
+export const removeProfile = "Profile picture removed";
+export const profilePictureUpdated = "Profile picture updated";
