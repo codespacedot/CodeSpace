@@ -91,6 +91,8 @@ function Login() {
         .then((res) => {
           if (res.status === 200) {
             sessionStorage.setItem("CS_TOKEN", res.data.access_token);
+            console.log("login data", res.data)
+            setIsLoading(false);
             window.location = "/profile";
           }
         })
