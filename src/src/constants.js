@@ -24,3 +24,4 @@ export const passwordChangeSuccessfully = "Password change successfully";
 export const errorTryAgain = "Try again";
 export const removeProfile = "Profile picture removed";
 export const profilePictureUpdated = "Profile picture updated";
+export const resourceSuccess = "Resource uploaded successfully";
